@@ -1,0 +1,86 @@
+<section id="proyectos" class="py-24 bg-surface-container-lowest relative overflow-hidden">
+  
+  <!-- Top and Bottom Ambient Light -->
+  <div class="absolute top-1/2 left-0 w-72 h-72 bg-primary/10 blur-[130px] rounded-full pointer-events-none"></div>
+
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div class="space-y-3">
+        <span class="das-chip">Casos de Éxito &amp; Portafolio</span>
+        <h2 class="text-display-lg text-on-surface">
+          Proyectos de <span class="text-primary">Alto Desempeño</span>
+        </h2>
+        <p class="text-body-lg text-on-surface-variant max-w-xl">
+          Explora una selección de productos digitales, plataformas SaaS e integraciones de IA desarrolladas con nuestra metodología de precisión.
+        </p>
+      </div>
+      
+      <a href="#cotizador" class="btn-secondary self-start md:self-auto">
+        <span>Iniciar Proyecto Similar</span>
+      </a>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      @for (item of projects(); track item.id) {
+        <div class="das-card p-7 flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-300 relative">
+          
+          <div class="space-y-5">
+            
+            <!-- Category badge & Status -->
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-tertiary uppercase tracking-wider bg-tertiary-container/30 px-3 py-1 rounded-full border border-tertiary/20">
+                {{ item.category }}
+              </span>
+              <span class="text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Producción
+              </span>
+            </div>
+
+            <!-- Title & Description -->
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold text-on-surface group-hover:text-primary transition-colors">
+                {{ item.title }}
+              </h3>
+              <p class="text-xs text-on-surface-variant leading-relaxed">
+                {{ item.description }}
+              </p>
+            </div>
+
+            <!-- Tech Badges -->
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              @for (tech of item.tech_stack; track tech) {
+                <span class="das-chip text-[10px] py-0.5! px-2! bg-surface-container-high text-on-surface">
+                  {{ tech }}
+                </span>
+              }
+            </div>
+
+          </div>
+
+          <!-- Footer with Metrics & Link -->
+          <div class="pt-6 mt-6 border-t border-outline-variant/40 flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-mono text-outline uppercase">Métrica Clave</p>
+              <p class="text-xs font-bold text-primary">{{ item.metrics }}</p>
+            </div>
+
+            @if (item.live_url) {
+              <a [href]="item.live_url" target="_blank" rel="noopener" class="w-9 h-9 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-on-surface hover:text-primary hover:border-primary transition-colors">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            } @else {
+              <a href="#cotizador" class="w-9 h-9 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center text-on-surface hover:text-primary hover:border-primary transition-colors">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            }
+          </div>
+
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

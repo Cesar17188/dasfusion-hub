@@ -1,0 +1,50 @@
+<section class="py-14 bg-surface-container-lowest border-y border-outline-variant/40 relative overflow-hidden">
+  
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 mb-8 text-center">
+    <span class="das-chip mb-2">Stack Tecnológico de Vanguardia</span>
+    <h2 class="text-xl md:text-2xl font-bold text-on-surface">
+      Tecnologías y Frameworks que Dominamos
+    </h2>
+  </div>
+
+  <!-- Edge Gradient Masks for Seamless Marquee Fade -->
+  <div class="absolute left-0 top-0 bottom-0 w-24 sm:w-40 z-10 pointer-events-none bg-linear-to-r from-surface-container-lowest to-transparent"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-24 sm:w-40 z-10 pointer-events-none bg-linear-to-l from-surface-container-lowest to-transparent"></div>
+
+  <!-- Marquee Ribbon -->
+  <div class="relative w-full overflow-hidden flex">
+    <div class="animate-marquee flex items-center gap-6 py-2">
+      
+      <!-- First set of items -->
+      @for (tech of technologies; track tech.name + '-1') {
+        <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary hover:bg-surface-container transition-all duration-300 min-w-max shadow-sm group">
+          <div 
+            class="w-10 h-10 rounded-xl flex items-center justify-center p-2 transition-transform group-hover:scale-110"
+            [style.background-color]="tech.color + '15'">
+            <div [innerHTML]="tech.iconSvg | safeHtml" class="w-6 h-6 flex items-center justify-center"></div>
+          </div>
+          <div class="flex flex-col text-left">
+            <span class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">{{ tech.name }}</span>
+            <span class="text-[11px] text-on-surface-variant font-mono">{{ tech.category }}</span>
+          </div>
+        </div>
+      }
+
+      <!-- Second set of items for seamless loop -->
+      @for (tech of technologies; track tech.name + '-2') {
+        <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary hover:bg-surface-container transition-all duration-300 min-w-max shadow-sm group">
+          <div 
+            class="w-10 h-10 rounded-xl flex items-center justify-center p-2 transition-transform group-hover:scale-110"
+            [style.background-color]="tech.color + '15'">
+            <div [innerHTML]="tech.iconSvg | safeHtml" class="w-6 h-6 flex items-center justify-center"></div>
+          </div>
+          <div class="flex flex-col text-left">
+            <span class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">{{ tech.name }}</span>
+            <span class="text-[11px] text-on-surface-variant font-mono">{{ tech.category }}</span>
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+</section>

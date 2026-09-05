@@ -1,0 +1,92 @@
+<footer class="bg-surface-container-lowest border-t border-outline-variant/50 relative overflow-hidden">
+  
+  <!-- Top Subtle Gradient Glow -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-linear-to-r from-transparent via-primary/40 to-transparent"></div>
+
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-12">
+      
+      <!-- Column 1: Brand & Bio -->
+      <div class="lg:col-span-4 space-y-4">
+        <a routerLink="/" class="inline-flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-linear-to-br from-primary via-primary-container to-surface-container-highest flex items-center justify-center border border-primary/30 shadow-lg shadow-primary/10">
+            <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xl font-bold tracking-tight text-on-surface">
+              DAS<span class="text-primary font-extrabold">Fusion</span>
+            </span>
+            <span class="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant">Core &bull; AI Lab</span>
+          </div>
+        </a>
+
+        <p class="text-xs text-on-surface-variant leading-relaxed max-w-sm">
+          Consultora tecnológica especializada en desarrollo de software moderno, orquestación de inteligencia artificial y arquitecturas escalables de alta precisión.
+        </p>
+
+        <div class="flex items-center gap-3 pt-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-[11px] font-mono text-on-surface-variant">Sistemas Operacionales 100% Online</span>
+        </div>
+      </div>
+
+      <!-- Column 2: Navigation -->
+      <div class="lg:col-span-2 space-y-3">
+        <p class="text-xs font-bold uppercase tracking-wider text-on-surface">Navegación</p>
+        <ul class="space-y-2 text-xs text-on-surface-variant">
+          <li><a href="#inicio" class="hover:text-primary transition-colors">Inicio</a></li>
+          <li><a href="#cotizador" class="hover:text-primary transition-colors">Cotizador de Proyectos</a></li>
+          <li><a href="#proyectos" class="hover:text-primary transition-colors">Proyectos &amp; Casos</a></li>
+          <li><a href="#equipo" class="hover:text-primary transition-colors">Equipo de Ingeniería</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Capabilities -->
+      <div class="lg:col-span-3 space-y-3">
+        <p class="text-xs font-bold uppercase tracking-wider text-on-surface">Especialidades</p>
+        <ul class="space-y-2 text-xs text-on-surface-variant">
+          <li class="flex items-center gap-1.5"><span class="text-primary">&bull;</span> Agentes y Modelos LLM</li>
+          <li class="flex items-center gap-1.5"><span class="text-primary">&bull;</span> Angular &amp; TypeScript Enterprise</li>
+          <li class="flex items-center gap-1.5"><span class="text-primary">&bull;</span> Arquitectura Supabase &amp; Postgres</li>
+          <li class="flex items-center gap-1.5"><span class="text-primary">&bull;</span> Microservicios Node.js &amp; Python</li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Contact & Location -->
+      <div class="lg:col-span-3 space-y-3">
+        <p class="text-xs font-bold uppercase tracking-wider text-on-surface">Contacto Corporativo</p>
+        <div class="space-y-2 text-xs text-on-surface-variant">
+          <p class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            contacto&#64;dasfusion.com
+          </p>
+          <p class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-tertiary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Medellín &bull; Cobertura Global
+          </p>
+        </div>
+
+        <div class="pt-2">
+          <a href="#cotizador" class="btn-primary text-xs py-2! px-4! w-full text-center">
+            Iniciar Conversación
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-on-surface-variant">
+      <p>&copy; {{ currentYear }} DASFusion Core. Todos los derechos reservados.</p>
+      <div class="flex items-center gap-6">
+        <span class="hover:text-primary cursor-pointer transition-colors">Términos de Servicio</span>
+        <span class="hover:text-primary cursor-pointer transition-colors">Privacidad &amp; Seguridad</span>
+        <span class="font-mono text-[11px] text-outline">v2.1.0</span>
+      </div>
+    </div>
+
+  </div>
+</footer>

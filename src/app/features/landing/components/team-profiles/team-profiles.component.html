@@ -1,0 +1,96 @@
+<section id="equipo" class="py-24 bg-surface relative overflow-hidden">
+  
+  <!-- Background Ambient Glow -->
+  <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div class="space-y-3">
+        <span class="das-chip">Ingenieros &amp; Especialistas</span>
+        <h2 class="text-display-lg text-on-surface">
+          Equipo de Desarrollo &amp; <span class="text-primary">Arquitectura</span>
+        </h2>
+        <p class="text-body-lg text-on-surface-variant max-w-xl">
+          Profesionales de alto rendimiento dedicados a diseñar arquitecturas robustas y modelos inteligentes para tus objetivos comerciales.
+        </p>
+      </div>
+      
+      <div class="hidden sm:flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-xs font-semibold text-on-surface">Disponibles para Nuevos Proyectos</span>
+      </div>
+    </div>
+
+    <!-- Profiles Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      @for (dev of developers(); track dev.id) {
+        <div class="das-card p-7 flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden">
+          
+          <!-- Subtle top border accent on hover -->
+          <div class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-tertiary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+          <div class="space-y-6">
+            
+            <!-- Avatar & Header -->
+            <div class="flex items-start justify-between">
+              <div class="relative">
+                <div class="w-20 h-20 rounded-2xl bg-surface-container-highest border-2 border-primary/30 p-1 group-hover:border-primary transition-colors overflow-hidden flex items-center justify-center shadow-lg">
+                  @if (dev.avatar_url) {
+                    <img [src]="dev.avatar_url" [alt]="dev.full_name" class="w-full h-full object-cover rounded-xl" />
+                  } @else {
+                    <div class="w-full h-full rounded-xl bg-linear-to-br from-primary-container to-surface-container-lowest flex items-center justify-center text-primary font-bold text-xl">
+                      {{ getInitials(dev.full_name) }}
+                    </div>
+                  }
+                </div>
+                <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-surface-container" title="Activo"></span>
+              </div>
+
+              <!-- Status badge -->
+              <span class="text-[11px] font-mono uppercase tracking-wider text-primary bg-primary-container/40 px-2.5 py-1 rounded-md border border-primary/20">
+                {{ dev.status }}
+              </span>
+            </div>
+
+            <!-- Info -->
+            <div class="space-y-1.5">
+              <h3 class="text-xl font-bold text-on-surface group-hover:text-primary transition-colors">
+                {{ dev.full_name }}
+              </h3>
+              <p class="text-sm font-semibold text-tertiary">
+                {{ dev.professional_title }}
+              </p>
+              <p class="text-xs text-on-surface-variant leading-relaxed line-clamp-3 pt-1">
+                {{ dev.bio }}
+              </p>
+            </div>
+
+            <!-- Skill Chips -->
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              @for (skill of dev.skills; track skill) {
+                <span class="das-chip text-[11px] py-0.5! px-2.5! bg-surface-container-highest/60 text-on-surface">
+                  {{ skill }}
+                </span>
+              }
+            </div>
+
+          </div>
+
+          <!-- Footer with Links -->
+          <div class="pt-6 mt-6 border-t border-outline-variant/40 flex items-center justify-between">
+            <span class="text-xs font-mono text-outline">DASFusion Core</span>
+            <div class="flex items-center gap-2">
+              <a href="#cotizador" class="text-xs font-semibold text-primary hover:underline flex items-center gap-1">
+                Solicitar Consultoría &rarr;
+              </a>
+            </div>
+          </div>
+
+        </div>
+      }
+    </div>
+
+  </div>
+</section>
