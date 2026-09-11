@@ -6,6 +6,7 @@ import { IndustriesCollageComponent } from '../../components/industries-collage/
 import { TeamProfilesComponent } from '../../components/team-profiles/team-profiles.component';
 import { ProjectsShowcaseComponent } from '../../components/projects-showcase/projects-showcase.component';
 import { QuoteEstimatorComponent } from '../../components/quote-estimator/quote-estimator.component';
+import { OfficeComponent } from '../../components/office/office.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -18,6 +19,7 @@ import { QuoteEstimatorComponent } from '../../components/quote-estimator/quote-
     TeamProfilesComponent,
     ProjectsShowcaseComponent,
     QuoteEstimatorComponent,
+    OfficeComponent,
   ],
   templateUrl: './landing-page.component.html'
 })

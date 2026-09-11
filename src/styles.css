@@ -234,18 +234,30 @@
 
   .das-input {
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--color-surface-container-high);
     border: 1px solid var(--color-outline-variant);
     border-radius: 0.5rem;
     padding: 0.625rem 1rem;
     color: var(--color-on-surface);
     font-size: 14px;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: all 0.2s ease-in-out;
     outline: none;
+
+    &:hover {
+      border-color: var(--color-primary);
+      background-color: var(--color-surface-container-highest);
+    }
 
     &:focus {
       border-color: var(--color-primary);
       box-shadow: 0 0 0 2px rgba(174, 199, 247, 0.25);
+      background-color: var(--color-surface-container-highest);
+    }
+
+    option {
+      background-color: #1e2022;
+      color: #ffffff;
+      padding: 0.5rem;
     }
   }
 }

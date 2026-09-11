@@ -3,6 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { SupabaseService } from '../../../../core/services/supabase.service';
 
+export interface SemanticTriple {
+  subject: string;
+  predicate: string;
+  object: string;
+}
+
 @Component({
   selector: 'app-quote-estimator',
   standalone: true,
@@ -17,12 +23,30 @@ export class QuoteEstimatorComponent {
   isSuccess = signal(false);
   errorMessage = signal<string | null>(null);
 
+  semanticTriples: SemanticTriple[] = [
+    {
+      subject: 'Motor de Estimación DASFusion',
+      predicate: 'evalúa y calcula',
+      object: 'Presupuestos y Alcance de Software en <24h'
+    },
+    {
+      subject: 'DASFusion Technologies',
+      predicate: 'garantiza y formaliza',
+      object: 'Contrato de Confidencialidad NDA'
+    },
+    {
+      subject: 'Equipo de Arquitectura',
+      predicate: 'diseña y cotiza',
+      object: 'Soluciones Cloud, BPM & Modelos IA'
+    }
+  ];
+
   quoteForm = this.fb.group({
     full_name: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     company: [''],
     project_type: ['AI & LLM Integration', [Validators.required]],
-    budget_range: ['$5,000 - $15,000 USD'],
+    budget_range: ['$800 - $1,500 USD'],
     estimated_timeline: ['1 a 2 Meses'],
     details: ['', [Validators.required, Validators.minLength(10)]]
   });
@@ -48,7 +72,7 @@ export class QuoteEstimatorComponent {
       this.isSuccess.set(true);
       this.quoteForm.reset({
         project_type: 'AI & LLM Integration',
-        budget_range: '$5,000 - $15,000 USD',
+        budget_range: '$800 - $1,500 USD',
         estimated_timeline: '1 a 2 Meses'
       });
     } catch {

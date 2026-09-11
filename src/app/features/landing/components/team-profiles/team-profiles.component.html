@@ -1,94 +1,140 @@
-<section id="equipo" class="py-24 bg-surface relative overflow-hidden">
+<section 
+  id="equipo" 
+  class="py-14 sm:py-20 lg:py-28 bg-surface relative overflow-hidden"
+  aria-labelledby="team-main-title"
+  itemscope 
+  itemtype="https://schema.org/AboutPage">
   
-  <!-- Background Ambient Glow -->
-  <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+  <!-- Background Ambient Glow (GPU-friendly) -->
+  <div class="absolute bottom-0 right-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-primary/5 blur-[100px] sm:blur-[120px] rounded-full pointer-events-none"></div>
 
   <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     
-    <!-- Header Section -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-      <div class="space-y-3">
-        <span class="das-chip">Ingenieros &amp; Especialistas</span>
-        <h2 class="text-display-lg text-on-surface">
+    <!-- Header Section SEO / AEO Optimized -->
+    <header class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 lg:mb-16 gap-6">
+      <div class="space-y-2 sm:space-y-3 max-w-2xl">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wide uppercase bg-primary/10 text-primary border border-primary/20">
+          Liderazgo Técnico &amp; Especialistas
+        </span>
+        <h2 id="team-main-title" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-on-surface tracking-tight leading-tight">
           Equipo de Desarrollo &amp; <span class="text-primary">Arquitectura</span>
         </h2>
-        <p class="text-body-lg text-on-surface-variant max-w-xl">
-          Profesionales de alto rendimiento dedicados a diseñar arquitecturas robustas y modelos inteligentes para tus objetivos comerciales.
+        <p class="text-sm sm:text-base md:text-lg text-on-surface-variant leading-relaxed">
+          Ingenieros y arquitectos de software dedicados a diseñar soluciones escalables, flujos BPMN y modelos inteligentes a la medida.
         </p>
       </div>
       
-      <div class="hidden sm:flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant">
+      <div class="hidden sm:inline-flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant shadow-xs">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
         <span class="text-xs font-semibold text-on-surface">Disponibles para Nuevos Proyectos</span>
       </div>
-    </div>
+    </header>
 
-    <!-- Profiles Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Profiles Grid Mobile-First (2 Column Balanced Layout) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
       @for (dev of developers(); track dev.id) {
-        <div class="das-card p-7 flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden">
+        <article 
+          class="das-card p-5 sm:p-7 lg:p-8 flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden active:scale-[0.99] touch-manipulation rounded-2xl sm:rounded-3xl border border-outline-variant/80 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10"
+          itemprop="employee" 
+          itemscope 
+          itemtype="https://schema.org/Person">
           
+          <meta itemprop="worksFor" content="DASFusion Technologies" />
+
           <!-- Subtle top border accent on hover -->
           <div class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-tertiary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-          <div class="space-y-6">
+          <div class="space-y-5">
             
-            <!-- Avatar & Header -->
+            <!-- Avatar & Header Status -->
             <div class="flex items-start justify-between">
               <div class="relative">
-                <div class="w-20 h-20 rounded-2xl bg-surface-container-highest border-2 border-primary/30 p-1 group-hover:border-primary transition-colors overflow-hidden flex items-center justify-center shadow-lg">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-surface-container-highest border-2 border-primary/30 p-1 group-hover:border-primary transition-colors overflow-hidden flex items-center justify-center shadow-lg">
                   @if (dev.avatar_url) {
-                    <img [src]="dev.avatar_url" [alt]="dev.full_name" class="w-full h-full object-cover rounded-xl" />
+                    <img [src]="dev.avatar_url" [alt]="dev.full_name" itemprop="image" class="w-full h-full object-cover rounded-xl" />
                   } @else {
-                    <div class="w-full h-full rounded-xl bg-linear-to-br from-primary-container to-surface-container-lowest flex items-center justify-center text-primary font-bold text-xl">
+                    <div class="w-full h-full rounded-xl bg-linear-to-br from-primary-container to-surface-container-lowest flex items-center justify-center text-primary font-bold text-lg sm:text-xl">
                       {{ getInitials(dev.full_name) }}
                     </div>
                   }
                 </div>
-                <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-surface-container" title="Activo"></span>
+                <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-emerald-500 border-2 border-surface-container" title="Activo"></span>
               </div>
 
-              <!-- Status badge -->
-              <span class="text-[11px] font-mono uppercase tracking-wider text-primary bg-primary-container/40 px-2.5 py-1 rounded-md border border-primary/20">
+              <!-- Role / Status badge -->
+              <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-primary bg-primary-container/40 px-2.5 py-1 rounded-md border border-primary/20">
                 {{ dev.status }}
               </span>
             </div>
 
-            <!-- Info -->
-            <div class="space-y-1.5">
-              <h3 class="text-xl font-bold text-on-surface group-hover:text-primary transition-colors">
+            <!-- Profile Info & Specialization Titles -->
+            <div class="space-y-2">
+              <h3 itemprop="name" class="text-xl sm:text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">
                 {{ dev.full_name }}
               </h3>
-              <p class="text-sm font-semibold text-tertiary">
-                {{ dev.professional_title }}
-              </p>
-              <p class="text-xs text-on-surface-variant leading-relaxed line-clamp-3 pt-1">
+              
+              <!-- Specialty Titles Badges -->
+              @if (dev.titles && dev.titles.length > 0) {
+                <div class="flex flex-wrap gap-1.5 pt-0.5">
+                  @for (t of dev.titles; track t) {
+                    <span itemprop="jobTitle" class="text-[10px] sm:text-[11px] font-semibold text-tertiary bg-tertiary/10 px-2.5 py-0.5 rounded-md border border-tertiary/20">
+                      {{ t }}
+                    </span>
+                  }
+                </div>
+              } @else {
+                <p itemprop="jobTitle" class="text-sm font-semibold text-tertiary">
+                  {{ dev.professional_title }}
+                </p>
+              }
+
+              <!-- AEO Direct Query Intent Question -->
+              <div class="bg-surface-container-high/40 border-l-2 border-primary px-3 py-2 rounded-r-lg mt-2">
+                <p class="text-[11px] sm:text-xs font-medium text-on-surface-variant italic leading-relaxed">
+                  "{{ dev.queryIntent }}"
+                </p>
+              </div>
+
+              <!-- Tripletas Semánticas & Grafo de Conocimiento (Oculto para humanos, 100% indexable para LLMs y Motores IA) -->
+              <div class="sr-only" itemprop="disambiguatingDescription">
+                <span>{{ dev.tripleLabel }}: {{ dev.semanticTriple.subject }} {{ dev.semanticTriple.predicate }} {{ dev.semanticTriple.object }}.</span>
+                <span>Especialidad Técnica: {{ dev.specialization }}</span>
+              </div>
+
+              <p itemprop="description" class="text-xs sm:text-[13px] text-on-surface-variant leading-relaxed line-clamp-3 pt-1">
                 {{ dev.bio }}
               </p>
             </div>
 
-            <!-- Skill Chips -->
-            <div class="flex flex-wrap gap-1.5 pt-2">
-              @for (skill of dev.skills; track skill) {
-                <span class="das-chip text-[11px] py-0.5! px-2.5! bg-surface-container-highest/60 text-on-surface">
-                  {{ skill }}
-                </span>
-              }
+            <!-- Technical Skills / Knowledge Domains -->
+            <div class="space-y-1.5 pt-1">
+              <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Especialidades &amp; Stack:</span>
+              <div class="flex flex-wrap gap-1.5" aria-label="Tecnologías y habilidades">
+                @for (skill of dev.skills; track skill) {
+                  <span itemprop="knowsAbout" class="das-chip text-[10px] sm:text-[11px] py-0.5! px-2.5! bg-surface-container-highest/60 text-on-surface">
+                    {{ skill }}
+                  </span>
+                }
+              </div>
             </div>
 
           </div>
 
-          <!-- Footer with Links -->
-          <div class="pt-6 mt-6 border-t border-outline-variant/40 flex items-center justify-between">
-            <span class="text-xs font-mono text-outline">DASFusion Core</span>
+          <!-- Footer with Conversion CTA -->
+          <div class="pt-5 mt-6 border-t border-outline-variant/40 flex items-center justify-between">
+            <span class="text-xs font-mono text-outline">DASFusion Core Team</span>
             <div class="flex items-center gap-2">
-              <a href="#cotizador" class="text-xs font-semibold text-primary hover:underline flex items-center gap-1">
-                Solicitar Consultoría &rarr;
+              <a 
+                href="#cotizador" 
+                [attr.aria-label]="'Solicitar consultoría con ' + dev.full_name"
+                class="inline-flex items-center justify-center gap-1.5 px-3 py-2 sm:py-1.5 rounded-lg bg-primary/10 hover:bg-primary text-primary hover:text-on-primary font-semibold transition-all duration-200 text-xs min-h-10 sm:min-h-0">
+                <span>Consultar con {{ dev.full_name.split(' ')[0] }}</span>
+                <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
           </div>
 
-        </div>
+        </article>
       }
     </div>
 
