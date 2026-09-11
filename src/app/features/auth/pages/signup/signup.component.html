@@ -1,0 +1,222 @@
+<div class="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8 relative overflow-hidden bg-background">
+  
+  <!-- Background Ambient Halos -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-136 h-136 bg-primary/10 blur-[150px] rounded-full pointer-events-none"></div>
+  <div class="absolute bottom-10 left-10 w-80 h-80 bg-tertiary/10 blur-[130px] rounded-full pointer-events-none"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(174,199,247,0.05),rgba(255,255,255,0))] pointer-events-none"></div>
+
+  <div class="max-w-lg w-full relative z-10 space-y-8">
+    
+    <!-- Top Brand & Header -->
+    <div class="text-center space-y-3">
+      <a routerLink="/" class="inline-flex items-center gap-2.5 group">
+        <img 
+          src="https://whlxncobakktxghxdyfw.supabase.co/storage/v1/object/public/general/logoDasfusionDegradado.webp" 
+          alt="DASFusion Logo" 
+          class="w-11 h-11 object-contain rounded-xl drop-shadow-[0_0_15px_rgba(174,199,247,0.3)] group-hover:scale-105 transition-transform"
+        />
+        <span class="text-2xl font-bold tracking-tight text-on-surface">
+          DAS<span class="text-primary font-extrabold">Fusion</span>
+        </span>
+      </a>
+
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight">
+        Registro de Clientes
+      </h1>
+      <p class="text-xs sm:text-sm text-on-surface-variant max-w-sm mx-auto">
+        Crea tu cuenta de cliente para gestionar requerimientos de software, cotizaciones y proyectos activos.
+      </p>
+    </div>
+
+    <!-- Main Card Container -->
+    <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-surface-container/80 backdrop-blur-xl border border-outline-variant/80 shadow-2xl space-y-6">
+      
+      @if (isSuccess()) {
+        <!-- Success State: Email Confirmation Sent -->
+        <div class="py-8 text-center space-y-4 animate-in fade-in zoom-in duration-300">
+          <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-2xl mx-auto flex items-center justify-center shadow-lg">
+            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold text-on-surface">¡Registro Exitoso!</h2>
+          <p class="text-xs sm:text-sm text-on-surface-variant max-w-sm mx-auto leading-relaxed">
+            Hemos enviado un enlace de confirmación a tu correo electrónico. Por favor verifica tu bandeja de entrada para activar tu cuenta de cliente.
+          </p>
+          <div class="pt-3">
+            <a 
+              routerLink="/login" 
+              class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary hover:bg-primary-fixed text-on-primary font-bold text-xs sm:text-sm transition-all shadow-md">
+              <span>Ir a Iniciar Sesión</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      } @else {
+        <!-- Google 1-Click Registration Button -->
+        <button 
+          type="button" 
+          (click)="onGoogleSignup()"
+          [disabled]="isGoogleLoading() || isSubmitting()"
+          class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-outline-variant/80 hover:border-primary/60 bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-sm font-semibold transition-all duration-200 shadow-sm active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
+          
+          @if (isGoogleLoading()) {
+            <svg class="animate-spin h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span>Conectando con Google...</span>
+          } @else {
+            <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span>Registrarse con Google</span>
+          }
+        </button>
+
+        <!-- Divider with text -->
+        <div class="relative flex items-center justify-center">
+          <div class="grow border-t border-outline-variant/40"></div>
+          <span class="shrink-0 px-3 text-[11px] font-mono uppercase tracking-wider text-on-surface-variant bg-surface-container">
+            O completa tus datos
+          </span>
+          <div class="grow border-t border-outline-variant/40"></div>
+        </div>
+
+        <!-- Error Alert Message -->
+        @if (errorMessage()) {
+          <div class="p-3.5 rounded-xl bg-error-container text-error text-xs border border-error/30 flex items-start gap-2.5 animate-in fade-in duration-200">
+            <svg class="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>{{ errorMessage() }}</span>
+          </div>
+        }
+
+        <!-- Registration Form -->
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="space-y-4">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label class="text-xs font-semibold text-on-surface-variant block">Nombre Completo <span class="text-primary">*</span></label>
+              <input 
+                type="text" 
+                formControlName="fullName" 
+                placeholder="Ej. Carlos Mendoza" 
+                class="das-input h-11 text-sm" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-xs font-semibold text-on-surface-variant block">Empresa u Organización</label>
+              <input 
+                type="text" 
+                formControlName="company" 
+                placeholder="Ej. InnovaTech S.A." 
+                class="das-input h-11 text-sm" />
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-xs font-semibold text-on-surface-variant block">Correo Electrónico <span class="text-primary">*</span></label>
+            <div class="relative">
+              <input 
+                type="email" 
+                formControlName="email" 
+                placeholder="carlos@empresa.com" 
+                class="das-input h-11 text-sm pl-10" />
+              <svg class="w-4 h-4 text-on-surface-variant absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label class="text-xs font-semibold text-on-surface-variant block">Contraseña <span class="text-primary">*</span></label>
+              <div class="relative">
+                <input 
+                  [type]="showPassword() ? 'text' : 'password'" 
+                  formControlName="password" 
+                  placeholder="Mínimo 6 caracteres" 
+                  class="das-input h-11 text-sm pr-9" />
+                <button 
+                  type="button" 
+                  (click)="togglePasswordVisibility()" 
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer">
+                  @if (showPassword()) {
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/></svg>
+                  } @else {
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  }
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-xs font-semibold text-on-surface-variant block">Confirmar Contraseña <span class="text-primary">*</span></label>
+              <input 
+                [type]="showPassword() ? 'text' : 'password'" 
+                formControlName="confirmPassword" 
+                placeholder="Repite tu contraseña" 
+                class="das-input h-11 text-sm" />
+            </div>
+          </div>
+
+          @if (signupForm.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched) {
+            <p class="text-[11px] text-error">Las contraseñas no coinciden.</p>
+          }
+
+          <!-- Terms acceptance checkbox -->
+          <div class="flex items-start gap-2.5 pt-1">
+            <input 
+              type="checkbox" 
+              id="acceptTerms" 
+              formControlName="acceptTerms" 
+              class="mt-1 w-4 h-4 rounded border-outline-variant bg-surface-container text-primary focus:ring-primary/40 cursor-pointer" />
+            <label for="acceptTerms" class="text-xs text-on-surface-variant leading-relaxed cursor-pointer">
+              Acepto los términos de servicio, acuerdo de confidencialidad y tratamiento de datos corporativos de DASFusion.
+            </label>
+          </div>
+
+          <button 
+            type="submit" 
+            [disabled]="signupForm.invalid || isSubmitting() || isGoogleLoading()"
+            class="w-full py-3.5 px-4 rounded-xl font-bold text-sm text-on-primary bg-primary hover:bg-primary-fixed active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer min-h-11">
+            
+            @if (isSubmitting()) {
+              <svg class="animate-spin h-5 w-5 text-on-primary" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>Creando cuenta de cliente...</span>
+            } @else {
+              <span>Registrar Cuenta de Cliente</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            }
+          </button>
+
+        </form>
+      }
+
+    </div>
+
+    <!-- Bottom Switch Link -->
+    <div class="text-center space-y-2">
+      <p class="text-xs text-on-surface-variant">
+        ¿Ya tienes una cuenta de cliente?
+        <a routerLink="/login" class="font-bold text-primary hover:underline ml-1">
+          Iniciar sesión
+        </a>
+      </p>
+      <div>
+        <a routerLink="/" class="text-xs text-outline hover:text-on-surface transition-colors inline-flex items-center gap-1">
+          <span aria-hidden="true">&larr;</span> Volver a la página principal
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

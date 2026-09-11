@@ -19,7 +19,7 @@ import { OfficeComponent } from '../../components/office/office.component';
     TeamProfilesComponent,
     ProjectsShowcaseComponent,
     QuoteEstimatorComponent,
-    OfficeComponent,
+    OfficeComponent
   ],
   templateUrl: './landing-page.component.html'
 })
