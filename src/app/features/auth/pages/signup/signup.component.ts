@@ -63,7 +63,7 @@ export class SignupComponent {
 
       // If user session is created immediately (Supabase auto-confirm enabled or session returned)
       if (res.session) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/portal/dashboard']);
       } else {
         // Email confirmation is required by Supabase auth configuration
         this.isSuccess.set(true);

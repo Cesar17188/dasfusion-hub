@@ -1,0 +1,383 @@
+<div class="space-y-8 animate-in fade-in duration-300">
+  
+  <!-- Portal Top Action Bar (Dedicated Page Navigation) -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-outline-variant/40">
+    <div class="flex items-center gap-3">
+      <a routerLink="/" class="flex items-center gap-2 group">
+        <img 
+          src="https://whlxncobakktxghxdyfw.supabase.co/storage/v1/object/public/general/logoDasfusionDegradado.webp" 
+          alt="DASFusion" 
+          class="w-8 h-8 object-contain rounded-lg group-hover:scale-105 transition-transform"
+        />
+        <span class="text-base font-bold text-on-surface">DAS<span class="text-primary font-extrabold">Fusion</span></span>
+      </a>
+
+      <div class="h-4 w-px bg-outline-variant/60"></div>
+
+      <!-- Page Tabs -->
+      <nav class="flex items-center gap-1 bg-surface-container-high/60 p-1 rounded-xl border border-outline-variant/40">
+        <a 
+          routerLink="/portal/dashboard" 
+          routerLinkActive="bg-primary text-on-primary font-bold shadow-sm"
+          class="px-3 py-1 text-xs font-semibold rounded-lg text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+          Dashboard
+        </a>
+        <a 
+          routerLink="/portal/projects" 
+          routerLinkActive="bg-primary text-on-primary font-bold shadow-sm"
+          class="px-3 py-1 text-xs font-semibold rounded-lg text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+          Proyectos
+        </a>
+        <a 
+          routerLink="/portal/kanban" 
+          routerLinkActive="bg-primary text-on-primary font-bold shadow-sm"
+          class="px-3 py-1 text-xs font-semibold rounded-lg text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" /></svg>
+          Kanban
+        </a>
+      </nav>
+    </div>
+
+    <!-- Right Controls: Back to site & Logout -->
+    <div class="flex items-center gap-2">
+      <a routerLink="/" class="text-xs text-on-surface-variant hover:text-on-surface px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high transition-colors">
+        Sitio Público
+      </a>
+      <button (click)="logout()" type="button" class="text-xs text-error hover:bg-error-container/40 px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer">
+        Salir
+      </button>
+    </div>
+  </div>
+
+  <!-- Welcome Banner -->
+  <div class="relative overflow-hidden rounded-3xl p-6 sm:p-8 border border-outline-variant/60 bg-linear-to-r from-surface-container via-surface-container-high to-surface-container">
+    <div class="absolute -right-10 -top-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute right-40 -bottom-10 w-60 h-60 bg-tertiary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="text-xs font-mono text-primary font-bold uppercase tracking-wider">DASFusion Enterprise Command Center</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight">
+          ¡Hola, <span class="text-transparent bg-clip-text bg-linear-to-r from-primary to-primary-fixed">{{ authService.userFullName() }}</span>!
+        </h1>
+        <p class="text-xs sm:text-sm text-on-surface-variant mt-1.5 max-w-2xl leading-relaxed">
+          Monitorea el avance de tus proyectos de ingeniería en tiempo real, revisa las fases de desarrollo en el tablero Kanban y gestiona nuevos requerimientos con nuestro equipo.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button 
+          (click)="openCreateModal()" 
+          type="button" 
+          class="btn-primary text-xs py-2.5 px-4 flex items-center gap-2 shadow-lg hover:shadow-primary/20">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          <span>Nuevo Proyecto</span>
+        </button>
+
+        <a 
+          routerLink="/portal/kanban" 
+          class="btn-secondary text-xs py-2.5 px-4 flex items-center gap-2">
+          <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+          </svg>
+          <span>Ver Tablero Kanban</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI Metrics Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    
+    <!-- Stat 1: Total Proyectos -->
+    <div class="das-card p-5 border border-outline-variant/60 flex flex-col justify-between relative overflow-hidden group">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Total Proyectos</span>
+        <div class="w-8 h-8 rounded-lg bg-primary/10 border border-primary/25 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        </div>
+      </div>
+      <div class="mt-4">
+        <div class="text-3xl font-extrabold text-on-surface">{{ projectService.metrics().totalProjects }}</div>
+        <p class="text-[11px] text-on-surface-variant mt-1">En el ecosistema DASFusion Hub</p>
+      </div>
+    </div>
+
+    <!-- Stat 2: En Desarrollo Activo -->
+    <div class="das-card p-5 border border-outline-variant/60 flex flex-col justify-between relative overflow-hidden group">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">En Desarrollo Activo</span>
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+        </div>
+      </div>
+      <div class="mt-4">
+        <div class="text-3xl font-extrabold text-emerald-400">{{ projectService.metrics().inDevelopment }}</div>
+        <p class="text-[11px] text-on-surface-variant mt-1">Sprints de codificación en curso</p>
+      </div>
+    </div>
+
+    <!-- Stat 3: Progreso Global Promedio -->
+    <div class="das-card p-5 border border-outline-variant/60 flex flex-col justify-between relative overflow-hidden group">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Avance Global</span>
+        <div class="w-8 h-8 rounded-lg bg-tertiary/15 border border-tertiary/30 flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+      </div>
+      <div class="mt-4">
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-extrabold text-on-surface">{{ projectService.metrics().averageProgress }}%</span>
+          <span class="text-[11px] text-emerald-400 font-semibold font-mono">En ruta</span>
+        </div>
+        <div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-2 overflow-hidden">
+          <div 
+            class="bg-linear-to-r from-primary to-primary-fixed h-full rounded-full transition-all duration-500"
+            [style.width.%]="projectService.metrics().averageProgress">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat 4: Entregables Completados -->
+    <div class="das-card p-5 border border-outline-variant/60 flex flex-col justify-between relative overflow-hidden group">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Hitos & Entregables</span>
+        <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-300 group-hover:scale-110 transition-transform">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      </div>
+      <div class="mt-4">
+        <div class="text-3xl font-extrabold text-on-surface">
+          {{ projectService.metrics().completedDeliverables }} 
+          <span class="text-sm font-normal text-on-surface-variant">/ {{ projectService.metrics().totalDeliverables }}</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant mt-1">Hitos validados exitosamente</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Section: Tarjetas Informativas de Proyectos Actuales -->
+  <div class="space-y-4">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div>
+        <h2 class="text-xl font-bold text-on-surface flex items-center gap-2">
+          <span>Estado Actual de los Proyectos</span>
+          <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant/60 text-primary">
+            {{ projectService.projects().length }} Activos
+          </span>
+        </h2>
+        <p class="text-xs text-on-surface-variant mt-0.5">Visión ejecutiva de cada iniciativa, equipo técnico y fase de entrega</p>
+      </div>
+
+      <a 
+        routerLink="/portal/projects" 
+        class="text-xs text-primary hover:underline font-semibold flex items-center gap-1">
+        <span>Gestionar todos los proyectos</span>
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      @for (project of projectService.projects(); track project.id) {
+        
+        @let phaseBadge = getPhaseBadge(project.phase);
+        @let statusBadge = getStatusBadge(project.status);
+
+        <div class="das-card p-6 border border-outline-variant/70 flex flex-col justify-between relative group hover:border-primary/50 transition-all duration-200 shadow-md">
+          
+          <div>
+            <!-- Top meta row: Phase & Health Status -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <span 
+                [class]="phaseBadge.bg + ' ' + phaseBadge.text + ' ' + phaseBadge.border"
+                class="text-[11px] font-semibold px-2.5 py-1 rounded-full border flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+                {{ phaseBadge.label }}
+              </span>
+
+              <div class="flex items-center gap-1.5 text-xs font-medium">
+                <span [class]="statusBadge.dot" class="w-2 h-2 rounded-full"></span>
+                <span [class]="statusBadge.text" class="text-[11px]">{{ statusBadge.label }}</span>
+              </div>
+            </div>
+
+            <!-- Title & Description -->
+            <h3 class="text-base font-bold text-on-surface group-hover:text-primary transition-colors">
+              {{ project.title }}
+            </h3>
+            <p class="text-xs text-on-surface-variant mt-1 line-clamp-2 leading-relaxed">
+              {{ project.description }}
+            </p>
+
+            <!-- Progress Bar -->
+            <div class="mt-4 p-3 rounded-xl bg-surface-container-high/60 border border-outline-variant/40">
+              <div class="flex items-center justify-between text-xs mb-1.5">
+                <span class="font-semibold text-on-surface-variant">Progreso del Desarrollo</span>
+                <span class="font-mono font-bold text-primary">{{ project.progressPercentage }}%</span>
+              </div>
+              <div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+                <div 
+                  class="h-full rounded-full transition-all duration-500"
+                  [class.bg-emerald-400]="project.progressPercentage >= 80"
+                  [class.bg-primary]="project.progressPercentage >= 35 && project.progressPercentage < 80"
+                  [class.bg-tertiary]="project.progressPercentage < 35"
+                  [style.width.%]="project.progressPercentage">
+                </div>
+              </div>
+
+              <!-- Hitos completados -->
+              <div class="flex items-center justify-between text-[11px] text-on-surface-variant mt-2 pt-2 border-t border-outline-variant/30 font-mono">
+                <span>Hitos cumplidos: <strong class="text-on-surface">{{ project.deliverablesDone }}/{{ project.deliverablesTotal }}</strong></span>
+                <span>{{ getDaysRemaining(project.targetDeliveryDate) }}</span>
+              </div>
+            </div>
+
+            <!-- Tech Stack Tags -->
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              @for (tech of project.techStack.slice(0, 4); track tech) {
+                <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-surface-container-high text-on-surface-variant border border-outline-variant/40">
+                  {{ tech }}
+                </span>
+              }
+              @if (project.techStack.length > 4) {
+                <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-surface-container-high text-on-surface-variant/70">
+                  +{{ project.techStack.length - 4 }}
+                </span>
+              }
+            </div>
+
+          </div>
+
+          <!-- Bottom Actions & Lead dev -->
+          <div class="mt-5 pt-4 border-t border-outline-variant/40 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-[10px] text-primary font-bold">
+                CM
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[10px] text-on-surface-variant">Líder Técnico:</span>
+                <span class="text-xs font-semibold text-on-surface">{{ project.assignedLead || 'Ing. César Morán' }}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              @if (project.liveUrl) {
+                <a 
+                  [href]="project.liveUrl" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="p-1.5 rounded-lg bg-surface-container-high hover:text-primary transition-colors"
+                  title="Ver demo en vivo">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              }
+              <button 
+                type="button" 
+                (click)="viewDetails(project)" 
+                class="btn-secondary text-xs py-1.5 px-3">
+                Ver Detalles
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      }
+    </div>
+  </div>
+
+  <!-- Quick Project Details Modal / Drawer -->
+  @if (selectedProjectForDetails(); as p) {
+    <div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
+      <div class="relative w-full max-w-xl bg-surface-container border border-outline-variant/80 rounded-2xl p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+        
+        <div class="flex items-center justify-between border-b border-outline-variant/60 pb-3">
+          <div>
+            <span class="text-[10px] font-mono text-primary font-bold uppercase">{{ p.category }}</span>
+            <h3 class="text-lg font-bold text-on-surface">{{ p.title }}</h3>
+          </div>
+          <button (click)="closeDetails()" class="p-1.5 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-on-surface cursor-pointer">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1">Descripción</h4>
+          <p class="text-xs text-on-surface leading-relaxed">{{ p.description }}</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 p-3 rounded-xl bg-surface-container-high/60 text-xs">
+          <div>
+            <span class="text-on-surface-variant text-[11px] block">Presupuesto Estimado:</span>
+            <span class="font-bold text-on-surface font-mono">${{ p.budget || 0 }} {{ p.currency || 'USD' }}</span>
+          </div>
+          <div>
+            <span class="text-on-surface-variant text-[11px] block">Fecha de Entrega:</span>
+            <span class="font-bold text-on-surface font-mono">{{ p.targetDeliveryDate }}</span>
+          </div>
+        </div>
+
+        @if (p.requirements && p.requirements.length > 0) {
+          <div>
+            <h4 class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">Hitos del Proyecto</h4>
+            <div class="space-y-1.5">
+              @for (req of p.requirements; track req.id) {
+                <div class="flex items-center gap-2 text-xs p-2 rounded-lg bg-surface-container-high">
+                  <span [class.text-emerald-400]="req.completed" [class.text-outline]="!req.completed" class="font-bold">
+                    {{ req.completed ? '✓' : '○' }}
+                  </span>
+                  <span [class.line-through]="req.completed" [class.text-on-surface-variant]="req.completed" class="text-on-surface">
+                    {{ req.title }}
+                  </span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <div class="pt-3 border-t border-outline-variant/60 flex items-center justify-end gap-2">
+          <a routerLink="/portal/kanban" (click)="closeDetails()" class="btn-primary text-xs py-2 px-4">
+            Ver en Tablero Kanban
+          </a>
+          <button (click)="closeDetails()" type="button" class="btn-secondary text-xs py-2 px-3">
+            Cerrar
+          </button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+  <!-- New Project Modal -->
+  @if (isCreateModalOpen()) {
+    <app-create-project-modal 
+      (close)="closeCreateModal()"
+      (created)="closeCreateModal()">
+    </app-create-project-modal>
+  }
+
+</div>

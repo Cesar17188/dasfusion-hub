@@ -52,7 +52,7 @@ export class AuthCallbackComponent implements OnInit {
       if (session?.user) {
         // Ensure profile exists in profiles table
         await this.authService.syncAndFetchProfile(session.user);
-        this.router.navigate(['/']);
+        this.router.navigate(['/portal/dashboard']);
         return;
       }
 
@@ -61,7 +61,7 @@ export class AuthCallbackComponent implements OnInit {
         if (currentSession?.user) {
           sub.data.subscription.unsubscribe();
           await this.authService.syncAndFetchProfile(currentSession.user);
-          this.router.navigate(['/']);
+          this.router.navigate(['/portal/dashboard']);
         }
       });
 

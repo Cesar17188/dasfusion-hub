@@ -1,0 +1,16 @@
+<div class="min-h-screen bg-surface text-on-surface flex flex-col selection:bg-primary/30 selection:text-primary">
+  
+  <!-- Main Content View Container (No top navbar) -->
+  <main class="flex-1 max-w-350 w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Modal for creating new project -->
+  @if (isCreateModalOpen()) {
+    <app-create-project-modal 
+      (close)="closeCreateModal()"
+      (created)="closeCreateModal()">
+    </app-create-project-modal>
+  }
+
+</div>

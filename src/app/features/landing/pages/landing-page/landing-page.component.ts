@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
+import { FooterComponent } from '../../../../shared/components/footer/footer.component';
 import { HeroComponent } from '../../components/hero/hero.component';
 import { TechMarqueeComponent } from '../../components/tech-marquee/tech-marquee.component';
 import { IndustriesCollageComponent } from '../../components/industries-collage/industries-collage.component';
@@ -13,6 +15,8 @@ import { OfficeComponent } from '../../components/office/office.component';
   standalone: true,
   imports: [
     CommonModule,
+    NavbarComponent,
+    FooterComponent,
     HeroComponent,
     TechMarqueeComponent,
     IndustriesCollageComponent,

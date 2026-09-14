@@ -1,23 +1,33 @@
-<main class="min-h-screen">
-  <!-- 1. Hero Section -->
-  <app-hero />
+<div class="min-h-screen flex flex-col bg-background text-on-surface">
+  <!-- Shared Sticky/Blur Navbar exclusively for Landing -->
+  <app-navbar />
 
-  <!-- 2. Technologies Infinite Left Marquee -->
-  <app-tech-marquee />
+  <!-- Main Landing Content -->
+  <main class="grow">
+    <!-- 1. Hero Section -->
+    <app-hero />
 
-  <!-- 3. Industries Solutions Collage -->
-  <app-industries-collage />
+    <!-- 2. Technologies Infinite Left Marquee -->
+    <app-tech-marquee />
 
-  <!-- 4. Developer Profiles & Engineering Team -->
-  <app-team-profiles />
+    <!-- 3. Industries Solutions Collage -->
+    <app-industries-collage />
 
-  <!-- 5. Featured Projects & Case Studies -->
-  <app-projects-showcase />
+    <!-- 4. Developer Profiles & Engineering Team -->
+    <app-team-profiles />
 
-  <!-- 6. Quote & Estimation Engine -->
-  <app-quote-estimator />
+    <!-- 5. Featured Projects & Case Studies -->
+    <app-projects-showcase />
 
-  <!-- 7. Physical Office & Direct Contact Channels -->
-  <app-office></app-office>
-</main>
+    <!-- 6. Quote & Estimation Engine -->
+    <app-quote-estimator />
+
+    <!-- 7. Physical Office & Direct Contact Channels -->
+    <app-office />
+  </main>
+
+  <!-- Shared Footer exclusively for Landing -->
+  <app-footer />
+</div>
+
 

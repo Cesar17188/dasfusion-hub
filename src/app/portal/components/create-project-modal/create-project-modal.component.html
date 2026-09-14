@@ -1,0 +1,240 @@
+<div class="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">
+  
+  <div class="relative w-full max-w-2xl bg-surface-container border border-outline-variant/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    
+    <!-- Modal Header -->
+    <div class="px-6 py-5 border-b border-outline-variant/60 flex items-center justify-between bg-surface-container-high/60">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center text-primary">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-on-surface">Crear Nuevo Proyecto</h3>
+          <p class="text-xs text-on-surface-variant">Registra un nuevo desarrollo para asignación de equipo y seguimiento de fases</p>
+        </div>
+      </div>
+
+      <button 
+        (click)="closeModal()" 
+        type="button" 
+        class="w-8 h-8 rounded-lg bg-surface-container border border-outline-variant/60 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors flex items-center justify-center cursor-pointer">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Modal Body / Form -->
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="flex-1 overflow-y-auto p-6 space-y-6">
+      
+      @if (errorMessage()) {
+        <div class="p-3.5 rounded-xl bg-error-container/40 border border-error/50 text-error text-xs flex items-center gap-2">
+          <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>{{ errorMessage() }}</span>
+        </div>
+      }
+
+      <!-- Project Title & Category -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">
+            Título del Proyecto <span class="text-error">*</span>
+          </label>
+          <input 
+            type="text" 
+            formControlName="title" 
+            placeholder="ej. Portal de Inteligencia de Clientes B2B"
+            class="das-input"
+          />
+          @if (projectForm.get('title')?.touched && projectForm.get('title')?.invalid) {
+            <p class="text-[11px] text-error mt-1">El título es requerido (mínimo 4 caracteres).</p>
+          }
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">
+            Categoría / Dominio <span class="text-error">*</span>
+          </label>
+          <select formControlName="category" class="das-input">
+            @for (cat of availableCategories; track cat) {
+              <option [value]="cat">{{ cat }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">
+          Descripción del Alcance & Objetivos <span class="text-error">*</span>
+        </label>
+        <textarea 
+          formControlName="description" 
+          rows="3"
+          placeholder="Describe brevemente el problema de negocio, funcionalidades clave y metas del proyecto..."
+          class="das-input resize-none"
+        ></textarea>
+        @if (projectForm.get('description')?.touched && projectForm.get('description')?.invalid) {
+          <p class="text-[11px] text-error mt-1">Ingresa una descripción de al menos 15 caracteres.</p>
+        }
+      </div>
+
+      <!-- Priority, Budget & Delivery Date -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">
+            Prioridad <span class="text-error">*</span>
+          </label>
+          <select formControlName="priority" class="das-input">
+            @for (p of availablePriorities; track p.value) {
+              <option [value]="p.value">{{ p.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">
+            Presupuesto Est. ($ USD)
+          </label>
+          <input 
+            type="number" 
+            formControlName="budget" 
+            class="das-input" 
+            placeholder="3000"
+            min="500" 
+            step="100"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">
+            Fecha Objetivo de Entrega
+          </label>
+          <input 
+            type="date" 
+            formControlName="targetDeliveryDate" 
+            class="das-input"
+          />
+        </div>
+      </div>
+
+      <!-- Tech Stack Selection -->
+      <div>
+        <label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">
+          Stack Tecnológico Sugerido
+        </label>
+        
+        <!-- Popular chips -->
+        <div class="flex flex-wrap gap-2 mb-3">
+          @for (tech of popularTechs; track tech) {
+            <button 
+              type="button" 
+              (click)="toggleTech(tech)"
+              [class.bg-primary]="selectedTechs().includes(tech)"
+              [class.text-on-primary]="selectedTechs().includes(tech)"
+              [class.border-primary]="selectedTechs().includes(tech)"
+              [class.bg-surface-container-high]="!selectedTechs().includes(tech)"
+              [class.text-on-surface-variant]="!selectedTechs().includes(tech)"
+              class="px-2.5 py-1 text-xs rounded-lg border border-outline-variant/60 font-medium transition-all duration-150 cursor-pointer hover:border-primary">
+              {{ tech }}
+              @if (selectedTechs().includes(tech)) {
+                <span class="ml-1 font-bold">✓</span>
+              }
+            </button>
+          }
+        </div>
+
+        <!-- Custom tech adder -->
+        <div class="flex gap-2">
+          <input 
+            type="text" 
+            [value]="customTechInput()" 
+            (input)="customTechInput.set($any($event.target).value)"
+            (keydown.enter)="$event.preventDefault(); addCustomTech()"
+            placeholder="Añadir otra tecnología (ej. Redis, Stripe, GraphQL)..." 
+            class="das-input text-xs py-2"
+          />
+          <button 
+            type="button" 
+            (click)="addCustomTech()"
+            class="btn-secondary text-xs px-3 py-2 shrink-0">
+            Añadir
+          </button>
+        </div>
+      </div>
+
+      <!-- Requirements / Key Deliverables -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <label class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
+            Requerimientos / Entregables Iniciales
+          </label>
+          <button 
+            type="button" 
+            (click)="addRequirement()" 
+            class="text-xs text-primary hover:underline font-semibold flex items-center gap-1 cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Agregar Hito
+          </button>
+        </div>
+
+        <div class="space-y-2">
+          @for (control of requirementsArray.controls; track $index; let idx = $index) {
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono text-on-surface-variant/60 w-5 text-center">{{ idx + 1 }}.</span>
+              <input 
+                type="text" 
+                [formControl]="$any(control)" 
+                placeholder="ej. Arquitectura y configuración de base de datos..."
+                class="das-input text-xs py-2 flex-1"
+              />
+              @if (requirementsArray.length > 1) {
+                <button 
+                  type="button" 
+                  (click)="removeRequirement(idx)"
+                  class="p-2 text-on-surface-variant hover:text-error transition-colors rounded-lg hover:bg-surface-container-highest cursor-pointer">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+    </form>
+
+    <!-- Modal Footer -->
+    <div class="px-6 py-4 border-t border-outline-variant/60 bg-surface-container-high/60 flex items-center justify-end gap-3">
+      <button 
+        type="button" 
+        (click)="closeModal()" 
+        class="btn-secondary text-xs px-4 py-2">
+        Cancelar
+      </button>
+      <button 
+        type="button" 
+        (click)="onSubmit()" 
+        [disabled]="isSubmitting() || projectForm.invalid"
+        class="btn-primary text-xs px-5 py-2 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+        @if (isSubmitting()) {
+          <svg class="w-4 h-4 animate-spin text-primary-container" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+          <span>Guardando...</span>
+        } @else {
+          <span>Crear Proyecto</span>
+        }
+      </button>
+    </div>
+
+  </div>
+</div>

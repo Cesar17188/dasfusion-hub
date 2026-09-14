@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth.service';
 
@@ -14,6 +14,7 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   isSubmitting = signal(false);
   isGoogleLoading = signal(false);
@@ -40,7 +41,8 @@ export class LoginComponent {
 
     try {
       await this.authService.signInWithEmail(email, password);
-      this.router.navigate(['/']);
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/portal/dashboard';
+      this.router.navigateByUrl(returnUrl);
     } catch (err: any) {
       console.error('Login error:', err);
       let message = 'No se pudo iniciar sesión. Verifica tus credenciales.';
