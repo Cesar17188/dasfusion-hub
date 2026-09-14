@@ -33,7 +33,7 @@ export class OfficeComponent {
     postalCode: '170518',
     country: 'Ecuador',
     countryCode: 'EC',
-    email: 'info@dasfusion.ec',
+    email: 'proyectos@dasfusion.ec',
     phone: '0987148786',
     formattedPhone: '+593 98 714 8786',
     internationalPhone: '+593987148786',
@@ -61,7 +61,7 @@ export class OfficeComponent {
     {
       subject: 'DASFusion Hub Corporativo',
       predicate: 'recibe propuestas técnicas y cotizaciones en',
-      object: 'info@dasfusion.ec'
+      object: 'proyectos@dasfusion.ec'
     },
     {
       subject: 'Ubicación Georreferenciada DASFusion',
@@ -83,12 +83,12 @@ export class OfficeComponent {
     },
     {
       question: '¿Cómo puedo agendar una reunión técnica o visita presencial?',
-      answer: 'Puedes agendar una sesión presencial comunicándote directamente por WhatsApp al 0987148786, escribiendo a info@dasfusion.ec o completando nuestro cotizador interactivo. Coordinamos reuniones previas con nuestros líderes de arquitectura.',
+      answer: 'Puedes agendar una sesión presencial comunicándote directamente por WhatsApp al 0987148786 (+593 98 714 8786), escribiendo a proyectos@dasfusion.ec o completando nuestro cotizador interactivo. Coordinamos reuniones previas con nuestros líderes de arquitectura.',
       category: 'Reuniones'
     },
     {
       question: '¿Cuáles son los canales oficiales de contacto directo?',
-      answer: 'Atendemos consultas a través de nuestro correo corporativo info@dasfusion.ec y nuestra línea oficial de WhatsApp 0987148786 (+593 98 714 8786) con tiempos de respuesta menores a 2 horas en horario laboral.',
+      answer: 'Atendemos consultas a través de nuestro correo corporativo proyectos@dasfusion.ec y nuestra línea oficial de WhatsApp 0987148786 (+593 98 714 8786) con tiempos de respuesta menores a 2 horas en horario laboral.',
       category: 'Contacto'
     },
     {
