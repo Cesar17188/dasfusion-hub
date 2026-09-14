@@ -183,29 +183,50 @@ export type Database = {
       projects: {
         Row: {
           id: string;
-          user_id: string;
+          user_id: string | null;
+          lead_id: string | null;
           title: string;
           description: string;
           tech_stack: string[] | null;
           live_url: string | null;
+          status: string | null;
+          priority: string | null;
+          budget: number | null;
+          progress_percentage: number | null;
+          start_date: string | null;
+          target_delivery_date: string | null;
           created_at: string | null;
         };
         Insert: {
           id?: string;
-          user_id: string;
+          user_id?: string | null;
+          lead_id?: string | null;
           title: string;
           description: string;
           tech_stack?: string[] | null;
           live_url?: string | null;
+          status?: string | null;
+          priority?: string | null;
+          budget?: number | null;
+          progress_percentage?: number | null;
+          start_date?: string | null;
+          target_delivery_date?: string | null;
           created_at?: string | null;
         };
         Update: {
           id?: string;
-          user_id?: string;
+          user_id?: string | null;
+          lead_id?: string | null;
           title?: string;
           description?: string;
           tech_stack?: string[] | null;
           live_url?: string | null;
+          status?: string | null;
+          priority?: string | null;
+          budget?: number | null;
+          progress_percentage?: number | null;
+          start_date?: string | null;
+          target_delivery_date?: string | null;
           created_at?: string | null;
         };
         Relationships: [];
