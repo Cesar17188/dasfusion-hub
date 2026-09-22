@@ -74,6 +74,26 @@ export class IndustriesCollageComponent {
       iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`
     },
     {
+      id: 'franchises-startups',
+      title: 'Emprendimientos & Franquicias',
+      tag: 'Automatización & Modernización',
+      queryIntent: '¿Cómo automatizar operaciones, estandarizar sucursales y modernizar sistemas para escalar?',
+      tripleLabel: 'Estandarización & Escalabilidad Multi-Sede',
+      semanticTriple: {
+        subject: 'DasFusion Franchise Hub',
+        predicate: 'moderniza y estandariza',
+        object: 'Sistemas y Procesos Multi-Sucursal'
+      },
+      description: 'Estandarización operativa, modernización de software legado y control centralizado multi-sede.',
+      solution: 'Migración y modernización de sistemas obsoletos a arquitecturas cloud escalables, automatización de flujos operativos y de venta, control centralizado de inventario por sucursal y onboarding acelerado para nuevos puntos de venta.',
+      gridSpan: 'lg:col-span-1',
+      gradient: 'linear-gradient(135deg, #1a2c4e 0%, #121316 100%)',
+      metricsLabel: 'Escalabilidad Operativa',
+      metrics: '+3x Velocidad de Expansión',
+      seoKeywords: ['Software para Franquicias', 'Automatización de Negocios', 'Modernización de Sistemas', 'Control Multi-Sucursal', 'Escalabilidad Cloud'],
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="16" y="3" width="6" height="6" rx="1"/><rect x="9" y="15" width="6" height="6" rx="1"/><path d="M5 9v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"/><path d="M12 14v1"/></svg>`
+    },
+    {
       id: 'bpm-automation',
       title: 'BPM & Automatización de Procesos',
       tag: 'Business Process Management',
@@ -186,7 +206,7 @@ export class IndustriesCollageComponent {
       },
       description: 'Gestión documental y transacciones inmobiliarias.',
       solution: 'Extracción semántica y auditoría de contratos con IA, valoración algorítmica de inmuebles y firma electrónica certificada con plena validez jurídica.',
-      gridSpan: 'lg:col-span-2',
+      gridSpan: 'lg:col-span-1',
       gradient: 'linear-gradient(135deg, #18263a 0%, #121316 100%)',
       metricsLabel: 'Agilidad Jurídica',
       metrics: '8x Agilidad Documental',
