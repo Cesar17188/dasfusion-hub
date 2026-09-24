@@ -92,7 +92,11 @@ export class SignupComponent {
       await this.authService.signInWithGoogle();
     } catch (err: any) {
       console.error('Google signup error:', err);
-      this.errorMessage.set('Error al conectar con Google. Por favor, intenta de nuevo.');
+      if (err?.message?.includes('provider is not enabled') || err?.message?.includes('Unsupported provider')) {
+        this.errorMessage.set('El registro con Google aún no está activado en el panel de Supabase. Activa el proveedor Google en Authentication > Providers.');
+      } else {
+        this.errorMessage.set(err?.message || 'Error al conectar con Google. Por favor, intenta de nuevo.');
+      }
       this.isGoogleLoading.set(false);
     }
   }
