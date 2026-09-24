@@ -3,7 +3,7 @@
   aria-labelledby="hero-title"
   itemscope 
   itemtype="https://schema.org/ProfessionalService"
-  class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-radial-gradient">
+  class="relative pt-24 pb-16 sm:pt-32 sm:pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-radial-gradient">
 
   <!-- AEO / Schema.org Entities & Semantic Triplet Metadata (Entity: DASFusion -> Action: Develops -> Object: Software & AI) -->
   <meta itemprop="name" content="DASFusion">
@@ -17,28 +17,28 @@
 
   <!-- Ambient Glow Orbs -->
   <div
-    class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-87.5 bg-primary/10 blur-[130px] rounded-full pointer-events-none"
+    class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-150 h-72 sm:h-87.5 bg-primary/10 blur-[100px] sm:blur-[130px] rounded-full pointer-events-none"
     aria-hidden="true">
   </div>
   <div 
-    class="absolute top-20 right-10 w-75 h-75 bg-tertiary/10 blur-[100px] rounded-full pointer-events-none"
+    class="absolute top-20 right-4 sm:right-10 w-48 sm:w-75 h-48 sm:h-75 bg-tertiary/10 blur-[80px] sm:blur-[100px] rounded-full pointer-events-none"
     aria-hidden="true">
   </div>
 
   <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
       <!-- Left: Hero Copy & Structured Proposition -->
-      <header class="lg:col-span-7 space-y-8 text-center lg:text-left">
+      <header class="lg:col-span-7 space-y-6 sm:space-y-8 text-center lg:text-left">
 
         <!-- Live Badge / Slogan Entity -->
         <div
-          class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-surface-container-high/90 border border-outline-variant shadow-lg backdrop-blur-md">
+          class="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-surface-container-high/90 border border-outline-variant shadow-lg backdrop-blur-md">
           <span class="flex h-2 w-2 relative" aria-hidden="true">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          <span itemprop="slogan" class="text-xs font-semibold text-on-surface uppercase tracking-wider">
+          <span itemprop="slogan" class="text-[11px] sm:text-xs font-semibold text-on-surface uppercase tracking-wider">
             DASFusion &bull; Enterprise Software &amp; AI
           </span>
         </div>
@@ -47,7 +47,7 @@
         <h1 
           id="hero-title" 
           itemprop="headline" 
-          class="text-display-lg text-on-surface font-extrabold tracking-tight">
+          class="text-display-lg text-on-surface font-extrabold tracking-tight text-balance">
           Ingeniería de Software &amp; <span
             class="bg-linear-to-r from-primary via-primary-fixed to-tertiary bg-clip-text text-transparent">Soluciones
             tecnológicas</span> personalizadas.
@@ -56,17 +56,17 @@
         <!-- Subheading / AEO Direct Answer Triplets: [DASFusion] -> [desarrolla y optimiza] -> [ecosistemas digitales y soluciones IA] -->
         <p 
           itemprop="description" 
-          class="text-body-lg text-on-surface-variant max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+          class="text-sm sm:text-base md:text-lg text-on-surface-variant max-w-2xl mx-auto lg:mx-0 leading-relaxed text-pretty">
           <strong class="text-on-surface font-semibold">DASFusion</strong> desarrolla ecosistemas digitales escalables, arquitecturas de datos en tiempo real y soluciones empresariales con <strong class="text-on-surface font-semibold">Inteligencia Artificial</strong> diseñadas para impulsar la competitividad y eficiencia de negocios en constante evolución.
         </p>
 
         <!-- Actions / Conversion CTAs with SEO & Accessibility descriptors -->
-        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-1 sm:pt-2 w-full">
           <a 
             href="#cotizador"
             aria-label="Iniciar cotización de proyecto de desarrollo de software e Inteligencia Artificial con DASFusion"
             title="Iniciar cotización con DASFusion"
-            class="btn-primary w-full sm:w-auto text-base py-3.5! px-8! shadow-xl shadow-primary/15 hover:shadow-primary/25">
+            class="btn-primary w-full sm:w-auto text-sm sm:text-base py-3.5! px-6 sm:px-8! shadow-xl shadow-primary/15 hover:shadow-primary/25 justify-center">
             <span>Iniciar Cotización</span>
             <svg class="w-4 h-4 ml-2 inline-block transition-transform group-hover:translate-x-1" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -77,24 +77,24 @@
             href="#proyectos" 
             aria-label="Explorar portafolio de proyectos y casos de éxito de DASFusion"
             title="Explorar proyectos desplegados por DASFusion"
-            class="btn-secondary w-full sm:w-auto text-base py-3.5! px-8!">
+            class="btn-secondary w-full sm:w-auto text-sm sm:text-base py-3.5! px-6 sm:px-8! justify-center">
             <span>Explorar Proyectos</span>
           </a>
         </div>
 
         <!-- Trust / Stats Strip: Semantic Definition List for Answer Engines & Screen Readers -->
-        <dl class="grid grid-cols-3 gap-6 pt-6 border-t border-outline-variant/30 max-w-xl mx-auto lg:mx-0">
-          <div>
-            <dt class="text-2xl lg:text-3xl font-bold text-on-surface font-sans">99.9%</dt>
-            <dd class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Fiabilidad SLA</dd>
+        <dl class="grid grid-cols-3 gap-3 sm:gap-6 pt-5 sm:pt-6 border-t border-outline-variant/30 max-w-xl mx-auto lg:mx-0">
+          <div class="text-center lg:text-left">
+            <dt class="text-xl sm:text-2xl lg:text-3xl font-bold text-on-surface font-sans">99.9%</dt>
+            <dd class="text-[10px] sm:text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Fiabilidad SLA</dd>
           </div>
-          <div>
-            <dt class="text-2xl lg:text-3xl font-bold text-primary font-sans">&lt;100ms</dt>
-            <dd class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Latencia Global</dd>
+          <div class="text-center lg:text-left">
+            <dt class="text-xl sm:text-2xl lg:text-3xl font-bold text-primary font-sans">&lt;100ms</dt>
+            <dd class="text-[10px] sm:text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Latencia Global</dd>
           </div>
-          <div>
-            <dt class="text-2xl lg:text-3xl font-bold text-tertiary font-sans">+40</dt>
-            <dd class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Proyectos Desplegados</dd>
+          <div class="text-center lg:text-left">
+            <dt class="text-xl sm:text-2xl lg:text-3xl font-bold text-tertiary font-sans">+40</dt>
+            <dd class="text-[10px] sm:text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Proyectos Desplegados</dd>
           </div>
         </dl>
 

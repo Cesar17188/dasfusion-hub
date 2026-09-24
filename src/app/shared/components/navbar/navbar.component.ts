@@ -1,4 +1,4 @@
-import { Component, signal, HostListener, inject } from '@angular/core';
+import { Component, signal, HostListener, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
@@ -16,11 +16,39 @@ export class NavbarComponent {
   isMobileMenuOpen = signal(false);
   isUserMenuOpen = signal(false);
 
+  constructor() {
+    // Lock/unlock body scroll on mobile when menu opens
+    effect(() => {
+      if (typeof document !== 'undefined') {
+        if (this.isMobileMenuOpen()) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  }
+
   @HostListener('window:scroll')
   onWindowScroll() {
     if (typeof window !== 'undefined') {
-      this.isScrolled.set(window.scrollY > 20);
+      this.isScrolled.set(window.scrollY > 15);
     }
+  }
+
+  @HostListener('window:resize')
+  onWindowResize() {
+    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+      if (this.isMobileMenuOpen()) {
+        this.closeMobileMenu();
+      }
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapePressed() {
+    this.closeMobileMenu();
+    this.closeUserMenu();
   }
 
   toggleMobileMenu() {
@@ -45,3 +73,4 @@ export class NavbarComponent {
     await this.authService.signOut();
   }
 }
+
