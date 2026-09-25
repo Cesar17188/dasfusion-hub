@@ -73,6 +73,8 @@ export class SignupComponent {
       let message = 'Error al registrar cliente. Por favor, intenta de nuevo.';
       if (err?.message?.includes('User already registered')) {
         message = 'Ya existe una cuenta con este correo electrónico. Inicia sesión en su lugar.';
+      } else if (err?.message?.includes('Error sending confirmation email') || err?.message?.includes('confirmation email')) {
+        message = 'El servidor de correos de Supabase no pudo enviar el email de confirmación. Desactiva "Confirm email" en el panel de Supabase o configura tu servidor SMTP.';
       } else if (err?.message) {
         message = err.message;
       }

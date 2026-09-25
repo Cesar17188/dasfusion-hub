@@ -115,10 +115,15 @@ export class AuthService {
    * Registro con correo y contraseña para clientes
    */
   async signUpWithEmail(data: SignUpClientData) {
+    const redirectUrl = typeof window !== 'undefined' 
+      ? `${window.location.origin}/auth/callback` 
+      : 'https://dasfusion.ec/auth/callback';
+
     const { data: authData, error } = await this.supabaseService.client.auth.signUp({
       email: data.email,
       password: data.password,
       options: {
+        emailRedirectTo: redirectUrl,
         data: {
           full_name: data.fullName,
           company: data.company || '',
