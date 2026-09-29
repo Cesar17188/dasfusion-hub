@@ -1,55 +1,71 @@
+# 🤖 AGENTS.md — Directrices de Desarrollo para Agentes de IA en DASFusion Hub
 
-You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
+Este documento define las reglas de arquitectura, estándares de código, patrones de diseño y restricciones que todos los agentes de inteligencia artificial y desarrolladores deben seguir rigurosamente al mantener, extender o refactorizar el código base de **DASFusion Hub**.
 
-## TypeScript Best Practices
+---
 
-- Use strict type checking
-- Prefer type inference when the type is obvious
-- Avoid the `any` type; use `unknown` when type is uncertain
+## 🏛️ 1. Arquitectura General y Filosofía de Diseño
 
-## Angular Best Practices
+- **Mobile-First por Defecto:** Todas las vistas, formularios, barras de navegación y componentes modales deben diseñarse y probarse comenzando por resoluciones móviles (`< 640px`) y escalando progresivamente hacia escritorio (`sm`, `md`, `lg`, `xl`).
+- **Alineación con Sistema de Tokens:** Usar los tokens de diseño definidos en `src/styles.css` (`--color-surface`, `--color-surface-container`, `--color-primary`, `--color-on-surface`, `--color-outline-variant`, etc.). Evitar colores hexadecimales quemados directamente en el HTML sin coherencia.
+- **Rendimiento y SSR:** La aplicación utiliza Angular con Server-Side Rendering (SSR). Asegurar que el acceso a APIs del navegador (`window`, `localStorage`, `navigator`) siempre esté protegido mediante verificaciones como `typeof window !== 'undefined'` o `isPlatformBrowser`.
 
-- Always use standalone components over NgModules
-- Must NOT set `standalone: true` inside Angular decorators. It's the default in Angular v20+.
-- Use signals for state management
-- Implement lazy loading for feature routes
-- Do NOT use the `@HostBinding` and `@HostListener` decorators. Put host bindings inside the `host` object of the `@Component` or `@Directive` decorator instead
-- Use `NgOptimizedImage` for all static images.
-  - `NgOptimizedImage` does not work for inline base64 images.
+---
 
-## Accessibility Requirements
+## 🅰️ 2. Estándares de Angular (v21+)
 
-- It MUST pass all AXE checks.
-- It MUST follow all WCAG AA minimums, including focus management, color contrast, and ARIA attributes.
+### 🧩 Componentes y Módulos
+- **Standalone Components:** Todos los componentes, directivas y pipes deben ser componentes independientes (*standalone*).
+- **Inyección de Dependencias:** Usar la función moderna `inject()` en lugar de la inyección por constructor.
+- **Detección de Cambios:** Preferir `ChangeDetectionStrategy.OnPush` en componentes que manejan estado puramente reactivo mediante Signals.
+- **Flujo de Control Nativo:** Usar exclusivamente la sintaxis moderna de control de flujo de Angular (`@if`, `@else if`, `@else`, `@for (item of list; track item.id)`, `@switch`). **Prohibido** utilizar directivas obsoletas como `*ngIf`, `*ngFor` o `*ngSwitch`.
+- **Formularios Reactivos:** Utilizar `ReactiveFormsModule` con validaciones tipadas (`Validators.required`, `Validators.minLength`, etc.).
 
-### Components
+### ⚡ Gestión de Estado con Signals
+- **Reactividad Fina:** Utilizar `signal()`, `computed()` y `effect()` para el manejo de estado local y global.
+- **Inmutabilidad:** No mutar directamente las señales; utilizar `.set(nuevoValor)` o `.update(val => ...)` para transformaciones de estado predecibles.
+- **Suscripciones Seguras:** Limpiar o desacoplar canales en tiempo real (`RealtimeChannel`) y evitar suscripciones manuales no gestionadas a Observables.
 
-- Keep components small and focused on a single responsibility
-- Use `input()` and `output()` functions instead of decorators
-- Use `computed()` for derived state
-- Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
-- Prefer inline templates for small components
-- Prefer Reactive forms instead of Template-driven ones
-- Do NOT use `ngClass`, use `class` bindings instead
-- Do NOT use `ngStyle`, use `style` bindings instead
-- When using external templates/styles, use paths relative to the component TS file.
+---
 
-## State Management
+## 🎨 3. Estilos, TailwindCSS v4 y Experiencia de Usuario (UX)
 
-- Use signals for local component state
-- Use `computed()` for derived state
-- Keep state transformations pure and predictable
-- Do NOT use `mutate` on signals, use `update` or `set` instead
+- **TailwindCSS v4:** Este proyecto utiliza la versión 4 de Tailwind. Usar clases compuestas modernas (ej. `bg-linear-to-r`, `shrink-0`, `backdrop-blur-md`).
+- **Inputs & Formularios Móviles:** Para evitar el zoom automático no deseado en dispositivos iOS / Safari móvil, los inputs de texto deben tener un tamaño de fuente mínimo de `16px` (`text-base`) o estar estilizados con la clase global `.das-input`.
+- **Accesibilidad (a11y):**
+  - Todos los botones interactivos e hipervínculos deben tener etiquetas legibles o atributos `aria-label`.
+  - Contrastes de color acordes a los lineamientos WCAG AA.
+  - Indicadores visuales de foco (`focus:ring-2`, `focus:outline-hidden`).
+- **Scroll Suave y Márgenes de Anclaje:** Mantener configurado `scroll-margin-top: 5rem` en las secciones de la página con identificador para evitar que la barra de navegación fija cubra los encabezados al hacer clic en enlaces de navegación.
 
-## Templates
+---
 
-- Keep templates simple and avoid complex logic
-- Use native control flow (`@if`, `@for`, `@switch`) instead of `*ngIf`, `*ngFor`, `*ngSwitch`
-- Use the async pipe to handle observables
-- Do not assume globals like (`new Date()`) are available.
+## 🗄️ 4. Base de Datos & Supabase
 
-## Services
+### 📋 Modelado y Tipado
+- Cualquier nueva tabla o modificación de columnas en Supabase debe reflejarse inmediatamente en:
+  1. `src/app/core/models/database.types.ts`
+  2. Scripts de migración en `supabase/migrations/` (con sintaxis SQL estándar de PostgreSQL).
+  3. Métodos tipados en `src/app/core/services/supabase.service.ts`.
 
-- Design services around a single responsibility
-- Use the `providedIn: 'root'` option for singleton services
-- Use the `inject()` function instead of constructor injection
+### 🛡️ Seguridad y Row Level Security (RLS)
+- **RLS Obligatorio:** Ninguna tabla debe exponerse sin Row Level Security habilitado.
+- Las políticas de lectura (`SELECT`) deben restringirse al propietario del registro (`auth.uid() = user_id`) o al correo autenticado, excepto para catálogos públicos.
+- Las políticas de inserción (`INSERT`) para cotizaciones y leads deben permitir usuarios autenticados y anónimos verificando la integridad de datos.
+
+### 🔔 Notificaciones y Mensajería
+- Las cotizaciones y solicitudes críticas deben integrarse con:
+  - Base de datos (`projects` y `quotes`).
+  - WhatsApp oficial de DASFusion (`+593 98 714 8786`).
+  - Correo electrónico de soporte de ingeniería (`proyectos@dasfusion.ec`).
+
+---
+
+## 🛠️ 5. Flujo de Trabajo y Buenas Prácticas de Código
+
+1. **Compilación Limpia:** Antes de dar por finalizada una tarea, verificar que `npm run build` o `ng build` se ejecute con código de salida 0 y sin errores de TypeScript.
+2. **Preservación de Lógica Previa:** No eliminar funcionalidades existentes ni comentarios explicativos a menos que el usuario lo solicite de manera explícita.
+3. **Manejo de Errores Descriptivo:** Presentar mensajes claros y amigables al usuario final cuando ocurran fallas de red o autenticación, evitando exponer stacktraces en bruto en la interfaz.
+
+---
+*Directrices vigentes para el desarrollo y mantenimiento continuo de DASFusion Hub.*
