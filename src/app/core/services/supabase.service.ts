@@ -13,6 +13,9 @@ import {
   Project,
   ProjectInsert,
   ProjectUpdate,
+  Quote,
+  QuoteInsert,
+  QuoteUpdate,
 } from '../models/database.types';
 
 @Injectable({
@@ -214,4 +217,42 @@ export class SupabaseService {
 
     if (error) throw error;
   }
+
+  /* ==========================================================================
+     Quotes / Cotizaciones (Public INSERT, Auth Owner CRUD)
+     ========================================================================== */
+
+  async getQuotes(): Promise<Quote[]> {
+    const { data, error } = await this.supabase
+      .from('quotes')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    return data ?? [];
+  }
+
+  async createQuote(quote: QuoteInsert): Promise<Quote> {
+    const { data, error } = await this.supabase
+      .from('quotes')
+      .insert(quote)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  }
+
+  async updateQuote(quoteId: string, updates: QuoteUpdate): Promise<Quote> {
+    const { data, error } = await this.supabase
+      .from('quotes')
+      .update(updates)
+      .eq('id', quoteId)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  }
 }
+

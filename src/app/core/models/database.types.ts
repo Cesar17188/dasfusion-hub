@@ -231,6 +231,54 @@ export type Database = {
         };
         Relationships: [];
       };
+      quotes: {
+        Row: {
+          id: string;
+          user_id: string | null;
+          client_name: string;
+          client_email: string;
+          client_phone: string | null;
+          category: string;
+          title: string;
+          description: string;
+          tech_stack: string[] | null;
+          budget: number | null;
+          status: string | null;
+          metadata: Json | null;
+          created_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id?: string | null;
+          client_name: string;
+          client_email: string;
+          client_phone?: string | null;
+          category: string;
+          title: string;
+          description: string;
+          tech_stack?: string[] | null;
+          budget?: number | null;
+          status?: string | null;
+          metadata?: Json | null;
+          created_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string | null;
+          client_name?: string;
+          client_email?: string;
+          client_phone?: string | null;
+          category?: string;
+          title?: string;
+          description?: string;
+          tech_stack?: string[] | null;
+          budget?: number | null;
+          status?: string | null;
+          metadata?: Json | null;
+          created_at?: string | null;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -278,3 +326,8 @@ export type ProfileUpdate = TablesUpdate<'profiles'>;
 export type Project = Tables<'projects'>;
 export type ProjectInsert = TablesInsert<'projects'>;
 export type ProjectUpdate = TablesUpdate<'projects'>;
+
+export type Quote = Tables<'quotes'>;
+export type QuoteInsert = TablesInsert<'quotes'>;
+export type QuoteUpdate = TablesUpdate<'quotes'>;
+
