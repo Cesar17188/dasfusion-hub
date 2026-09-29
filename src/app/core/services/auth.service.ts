@@ -9,6 +9,18 @@ export interface SignUpClientData {
   password: string;
   fullName: string;
   company?: string;
+  phone?: string;
+  allowMarketingEmails?: boolean;
+}
+
+export interface UpdateProfileData {
+  fullName: string;
+  company?: string;
+  professionalTitle?: string;
+  bio?: string;
+  phone?: string;
+  allowMarketingEmails?: boolean;
+  emailNotifications?: boolean;
 }
 
 @Injectable({
@@ -28,6 +40,28 @@ export class AuthService {
            this.currentUser()?.user_metadata?.['full_name'] || 
            this.currentUser()?.email?.split('@')[0] || 
            'Cliente';
+  });
+
+  readonly userEmail = computed(() => this.currentUser()?.email || '');
+  readonly userCompany = computed(() => {
+    return this.currentUser()?.user_metadata?.['company'] || '';
+  });
+  readonly userPhone = computed(() => {
+    return this.currentUser()?.user_metadata?.['phone'] || '';
+  });
+  readonly allowMarketingEmails = computed(() => {
+    const meta = this.currentUser()?.user_metadata;
+    if (meta && typeof meta['allow_marketing_emails'] === 'boolean') {
+      return meta['allow_marketing_emails'];
+    }
+    return true; // Predeterminado activo con aviso previo
+  });
+  readonly emailNotifications = computed(() => {
+    const meta = this.currentUser()?.user_metadata;
+    if (meta && typeof meta['email_notifications'] === 'boolean') {
+      return meta['email_notifications'];
+    }
+    return true;
   });
 
   constructor() {
@@ -127,6 +161,9 @@ export class AuthService {
         data: {
           full_name: data.fullName,
           company: data.company || '',
+          phone: data.phone || '',
+          allow_marketing_emails: data.allowMarketingEmails ?? true,
+          email_notifications: true,
           role: 'client'
         }
       }
@@ -141,6 +178,49 @@ export class AuthService {
     }
 
     return authData;
+  }
+
+  /**
+   * Actualiza la información del perfil del usuario y sus preferencias de correo
+   */
+  async updateUserProfile(data: UpdateProfileData) {
+    const user = this.currentUser();
+    if (!user) throw new Error('No hay usuario autenticado');
+
+    // 1. Actualizar metadata en Supabase Auth
+    const { data: updatedAuth, error: authErr } = await this.supabaseService.client.auth.updateUser({
+      data: {
+        full_name: data.fullName,
+        company: data.company || '',
+        phone: data.phone || '',
+        professional_title: data.professionalTitle || '',
+        bio: data.bio || '',
+        allow_marketing_emails: data.allowMarketingEmails ?? true,
+        email_notifications: data.emailNotifications ?? true
+      }
+    });
+
+    if (authErr) throw authErr;
+
+    if (updatedAuth.user) {
+      this.currentUser.set(updatedAuth.user);
+    }
+
+    // 2. Actualizar tabla profiles
+    try {
+      const updatedProfile = await this.supabaseService.updateProfile(user.id, {
+        full_name: data.fullName,
+        professional_title: data.professionalTitle || (data.company ? `Cliente / ${data.company}` : 'Cliente DASFusion'),
+        bio: data.bio || ''
+      });
+      if (updatedProfile) {
+        this.currentProfile.set(updatedProfile);
+      }
+    } catch (e) {
+      console.warn('Profile row update notice (metadata updated successfully):', e);
+    }
+
+    return updatedAuth.user;
   }
 
   /**

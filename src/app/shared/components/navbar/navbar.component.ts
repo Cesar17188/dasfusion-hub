@@ -1,6 +1,6 @@
 import { Component, signal, HostListener, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class NavbarComponent {
   authService = inject(AuthService);
+  private router = inject(Router);
 
   isScrolled = signal(false);
   isMobileMenuOpen = signal(false);
@@ -67,10 +68,37 @@ export class NavbarComponent {
     this.isUserMenuOpen.set(false);
   }
 
+  navigateToSection(sectionId: string, event?: Event) {
+    if (event) {
+      event.preventDefault();
+    }
+    this.closeMobileMenu();
+
+    if (typeof window !== 'undefined') {
+      const isLandingPage = window.location.pathname === '/' || window.location.pathname === '';
+      const element = document.getElementById(sectionId);
+
+      if (isLandingPage && element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.history.replaceState(null, '', `#${sectionId}`);
+      } else {
+        this.router.navigate(['/'], { fragment: sectionId }).then(() => {
+          setTimeout(() => {
+            const targetEl = document.getElementById(sectionId);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 150);
+        });
+      }
+    }
+  }
+
   async logout() {
     this.closeUserMenu();
     this.closeMobileMenu();
     await this.authService.signOut();
   }
 }
+
 

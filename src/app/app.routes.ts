@@ -47,6 +47,16 @@ export const routes: Routes = [
         path: 'kanban',
         loadComponent: () => import('./portal/pages/kanban/portal-kanban.component').then(m => m.PortalKanbanComponent),
         title: 'Tablero Kanban de Fases | DASFusion Portal'
+      },
+      {
+        path: 'estimator',
+        loadComponent: () => import('./portal/pages/estimator/portal-estimator.component').then(m => m.PortalEstimatorComponent),
+        title: 'Cotizador & Estimación IA | DASFusion Portal'
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('./portal/pages/settings/portal-settings.component').then(m => m.PortalSettingsComponent),
+        title: 'Configuración de Cuenta & Privacidad | DASFusion Portal'
       }
     ]
   },

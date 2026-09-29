@@ -35,9 +35,11 @@ export class SignupComponent {
   signupForm: FormGroup = this.fb.group({
     fullName: ['', [Validators.required, Validators.minLength(2)]],
     company: [''],
+    phone: [''],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required]],
+    allowMarketingEmails: [true],
     acceptTerms: [true, [Validators.requiredTrue]]
   }, { validators: passwordMatchValidator });
 
@@ -51,14 +53,16 @@ export class SignupComponent {
     this.isSubmitting.set(true);
     this.errorMessage.set(null);
 
-    const { fullName, company, email, password } = this.signupForm.value;
+    const { fullName, company, phone, email, password, allowMarketingEmails } = this.signupForm.value;
 
     try {
       const res = await this.authService.signUpWithEmail({
         email,
         password,
         fullName,
-        company
+        company,
+        phone,
+        allowMarketingEmails
       });
 
       // If user session is created immediately (Supabase auto-confirm enabled or session returned)

@@ -87,7 +87,12 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
   }
 
   body {

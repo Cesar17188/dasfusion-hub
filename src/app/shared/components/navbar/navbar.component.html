@@ -38,31 +38,36 @@
         <a 
           routerLink="/"
           fragment="inicio"
-          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200">
+          (click)="navigateToSection('inicio', $event)"
+          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 cursor-pointer">
           Inicio
         </a>
         <a 
           routerLink="/"
           fragment="cotizador"
-          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200">
+          (click)="navigateToSection('cotizador', $event)"
+          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 cursor-pointer">
           Cotizador
         </a>
         <a 
           routerLink="/"
           fragment="oficina"
-          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200">
+          (click)="navigateToSection('oficina', $event)"
+          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 cursor-pointer">
           Oficina
         </a>
         <a 
           routerLink="/"
           fragment="proyectos"
-          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200">
+          (click)="navigateToSection('proyectos', $event)"
+          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 cursor-pointer">
           Proyectos
         </a>
         <a 
           routerLink="/"
           fragment="equipo"
-          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200">
+          (click)="navigateToSection('equipo', $event)"
+          class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 cursor-pointer">
           Equipo
         </a>
       </nav>
@@ -124,9 +129,14 @@
                   Tablero Kanban
                 </a>
 
-                <a routerLink="/" fragment="cotizador" (click)="closeUserMenu()" class="flex items-center gap-2 px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-md transition-colors">
-                  <svg class="w-4 h-4 text-tertiary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                  Solicitar Cotización
+                <a routerLink="/portal/estimator" (click)="closeUserMenu()" class="flex items-center gap-2 px-3 py-2 text-xs text-amber-300 font-semibold hover:bg-surface-container-high rounded-md transition-colors">
+                  <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                  Cotizador &amp; Estimación IA
+                </a>
+
+                <a routerLink="/portal/settings" (click)="closeUserMenu()" class="flex items-center gap-2 px-3 py-2 text-xs text-purple-300 font-semibold hover:bg-surface-container-high rounded-md transition-colors">
+                  <svg class="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                  Configuración de Cuenta
                 </a>
                 
                 <button 
@@ -163,8 +173,8 @@
         <a 
           routerLink="/" 
           fragment="cotizador" 
-          (click)="closeMobileMenu()" 
-          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-primary text-on-primary hover:bg-primary-fixed transition-colors shadow-sm">
+          (click)="navigateToSection('cotizador', $event)" 
+          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-primary text-on-primary hover:bg-primary-fixed transition-colors shadow-sm cursor-pointer">
           <span>Cotizar</span>
           <span aria-hidden="true">&rarr;</span>
         </a>
@@ -223,10 +233,10 @@
       <!-- Primary Anchor Navigation -->
       <div class="grid grid-cols-1 gap-1.5">
         <a 
-          (click)="closeMobileMenu()" 
           routerLink="/" 
           fragment="inicio" 
-          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors">
+          (click)="navigateToSection('inicio', $event)"
+          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors cursor-pointer">
           <span class="flex items-center gap-3">
             <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -237,10 +247,10 @@
         </a>
 
         <a 
-          (click)="closeMobileMenu()" 
           routerLink="/" 
           fragment="cotizador" 
-          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors">
+          (click)="navigateToSection('cotizador', $event)"
+          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors cursor-pointer">
           <span class="flex items-center gap-3">
             <svg class="w-4 h-4 text-tertiary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -254,10 +264,10 @@
         </a>
 
         <a 
-          (click)="closeMobileMenu()" 
           routerLink="/" 
           fragment="oficina" 
-          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors">
+          (click)="navigateToSection('oficina', $event)"
+          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors cursor-pointer">
           <span class="flex items-center gap-3">
             <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -269,10 +279,10 @@
         </a>
 
         <a 
-          (click)="closeMobileMenu()" 
           routerLink="/" 
           fragment="proyectos" 
-          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors">
+          (click)="navigateToSection('proyectos', $event)"
+          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors cursor-pointer">
           <span class="flex items-center gap-3">
             <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -283,10 +293,10 @@
         </a>
 
         <a 
-          (click)="closeMobileMenu()" 
           routerLink="/" 
           fragment="equipo" 
-          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors">
+          (click)="navigateToSection('equipo', $event)"
+          class="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high active:bg-surface-container-highest transition-colors cursor-pointer">
           <span class="flex items-center gap-3">
             <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
