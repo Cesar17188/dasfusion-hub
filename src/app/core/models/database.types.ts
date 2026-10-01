@@ -160,6 +160,7 @@ export type Database = {
           professional_title: string | null;
           bio: string | null;
           avatar_url: string | null;
+          role: string | null;
           created_at: string | null;
         };
         Insert: {
@@ -168,6 +169,7 @@ export type Database = {
           professional_title?: string | null;
           bio?: string | null;
           avatar_url?: string | null;
+          role?: string | null;
           created_at?: string | null;
         };
         Update: {
@@ -176,6 +178,7 @@ export type Database = {
           professional_title?: string | null;
           bio?: string | null;
           avatar_url?: string | null;
+          role?: string | null;
           created_at?: string | null;
         };
         Relationships: [];

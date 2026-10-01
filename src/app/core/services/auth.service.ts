@@ -42,6 +42,12 @@ export class AuthService {
            'Cliente';
   });
 
+  readonly userRole = computed(() => {
+    return this.currentProfile()?.role || 
+           this.currentUser()?.user_metadata?.['role'] || 
+           'client';
+  });
+
   readonly userEmail = computed(() => this.currentUser()?.email || '');
   readonly userCompany = computed(() => {
     return this.currentUser()?.user_metadata?.['company'] || '';
@@ -96,17 +102,28 @@ export class AuthService {
   }
 
   /**
-   * Sincroniza y asegura que exista el perfil del cliente en la tabla profiles
+   * Sincroniza y asegura que exista el perfil del cliente con rol 'client' en la tabla profiles
    */
   async syncAndFetchProfile(user: User): Promise<Profile | null> {
     try {
       const existing = await this.supabaseService.getProfile(user.id);
       if (existing) {
+        // Si no tenía rol en base de datos, asegurarse de asignar 'client'
+        if (!existing.role) {
+          try {
+            const updated = await this.supabaseService.updateProfile(user.id, { role: 'client' });
+            this.currentProfile.set(updated);
+            return updated;
+          } catch {
+            // fallback
+          }
+        }
         this.currentProfile.set(existing);
         return existing;
       }
 
-      // If profile does not exist yet (e.g. Google OAuth new user), create it as a client
+      // If profile does not exist yet (e.g. Google OAuth new user or fresh signup), create it with role client
+      const role = (user.user_metadata?.['role'] as string) || 'client';
       const fullName = user.user_metadata?.['full_name'] || 
                        user.user_metadata?.['name'] || 
                        user.email?.split('@')[0] || 
@@ -122,6 +139,7 @@ export class AuthService {
         professional_title: company ? `Cliente / ${company}` : 'Cliente DASFusion',
         bio: 'Cliente registrado en DASFusion Hub',
         avatar_url: avatarUrl,
+        role: role,
         created_at: new Date().toISOString()
       };
 
