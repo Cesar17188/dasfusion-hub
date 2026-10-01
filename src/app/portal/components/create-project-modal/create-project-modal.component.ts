@@ -20,13 +20,13 @@ export class CreateProjectModalComponent {
   isSubmitting = signal(false);
   errorMessage = signal<string | null>(null);
 
-  availableCategories: ProjectCategory[] = [
-    'Fullstack Web',
-    'Mobile App',
-    'AI & Machine Learning',
-    'Cloud & DevOps',
-    'SaaS & Enterprise',
-    'Automation & Bots'
+  availableCategories: { value: ProjectCategory; label: string }[] = [
+    { value: 'Fullstack Web', label: 'Página Web o Plataforma Online' },
+    { value: 'Mobile App', label: 'Aplicación para Celulares (App Móvil)' },
+    { value: 'SaaS & Enterprise', label: 'Sistema de Gestión para Empresas' },
+    { value: 'AI & Machine Learning', label: 'Inteligencia Artificial y Asistentes' },
+    { value: 'Automation & Bots', label: 'Automatización de Tareas y Procesos' },
+    { value: 'Cloud & DevOps', label: 'Servidores, Nube y Seguridad' }
   ];
 
   availablePriorities: { value: ProjectPriority; label: string; color: string }[] = [

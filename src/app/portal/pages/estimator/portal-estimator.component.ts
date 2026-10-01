@@ -28,16 +28,46 @@ export class PortalEstimatorComponent {
   readonly destinationEmail = 'proyectos@dasfusion.ec';
 
   categories: { value: ProjectCategory; label: string; icon: string; desc: string }[] = [
-    { value: 'AI & Machine Learning', label: 'AI & Machine Learning', icon: 'sparkles', desc: 'Agentes inteligentes, RAG, LLMs y modelos predictivos' },
-    { value: 'Fullstack Web', label: 'Fullstack Web & Apps', icon: 'globe', desc: 'Plataformas web reactivas, portales y aplicaciones de alta escala' },
-    { value: 'SaaS & Enterprise', label: 'SaaS & Software Enterprise', icon: 'building', desc: 'Sistemas multi-tenant, paneles de control y facturación' },
-    { value: 'Mobile App', label: 'Mobile App (iOS / Android)', icon: 'mobile', desc: 'Aplicaciones nativas e híbridas de alto rendimiento' },
-    { value: 'Cloud & DevOps', label: 'Cloud & Infraestructura', icon: 'cloud', desc: 'Arquitecturas serverless, microservicios y pipelines CI/CD' },
-    { value: 'Automation & Bots', label: 'Automatización & BPM', icon: 'cpu', desc: 'Flujos automatizados, scraping y bots transaccionales' }
+    { 
+      value: 'Fullstack Web', 
+      label: 'Página Web o Plataforma Online', 
+      icon: 'globe', 
+      desc: 'Para vender por internet, dar a conocer tus servicios, portales de clientes o crear tu negocio digital.' 
+    },
+    { 
+      value: 'Mobile App', 
+      label: 'Aplicación para Celulares (App Móvil)', 
+      icon: 'mobile', 
+      desc: 'Una aplicación para que tus clientes o tu equipo la instalen y usen desde Android o iPhone.' 
+    },
+    { 
+      value: 'SaaS & Enterprise', 
+      label: 'Sistema de Gestión para Empresas', 
+      icon: 'building', 
+      desc: 'Para administrar tu negocio: inventarios, ventas, clientes, facturación y paneles de control.' 
+    },
+    { 
+      value: 'AI & Machine Learning', 
+      label: 'Inteligencia Artificial y Asistentes', 
+      icon: 'sparkles', 
+      desc: 'Asistentes virtuales para atención al cliente, análisis automático de documentos y respuestas inteligentes.' 
+    },
+    { 
+      value: 'Automation & Bots', 
+      label: 'Automatización de Tareas y Procesos', 
+      icon: 'cpu', 
+      desc: 'Ahorra tiempo automatizando reportes, envío de mensajes, sincronización de información y tareas diarias.' 
+    },
+    { 
+      value: 'Cloud & DevOps', 
+      label: 'Servidores, Nube y Seguridad', 
+      icon: 'cloud', 
+      desc: 'Alojamiento seguro en internet, bases de datos y respaldo continuo para que tu sistema nunca falle.' 
+    }
   ];
 
   estimatorForm: FormGroup = this.fb.group({
-    category: ['AI & Machine Learning', Validators.required],
+    category: ['Fullstack Web', Validators.required],
     title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
     description: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(3000)]]
   });

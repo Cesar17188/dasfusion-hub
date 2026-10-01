@@ -57,13 +57,16 @@
 
         <div>
           <label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">
-            Categoría / Dominio <span class="text-error">*</span>
+            Tipo de Solución / Categoría <span class="text-error">*</span>
           </label>
           <select formControlName="category" class="das-input">
-            @for (cat of availableCategories; track cat) {
-              <option [value]="cat">{{ cat }}</option>
+            @for (cat of availableCategories; track cat.value) {
+              <option [value]="cat.value">{{ cat.label }}</option>
             }
           </select>
+          <p class="text-[11px] text-on-surface-variant/80 mt-1.5 flex items-center gap-1">
+            <span class="text-primary font-bold">💡 Nota:</span> Si no sabes cuál elegir, selecciona la más próxima a tu necesidad.
+          </p>
         </div>
       </div>
 

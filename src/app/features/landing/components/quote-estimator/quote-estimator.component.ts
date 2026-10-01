@@ -53,27 +53,27 @@ export class QuoteEstimatorComponent {
   portalBenefits: EstimatorFeature[] = [
     {
       icon: 'calculator',
-      title: 'Estimación Inteligente con IA',
-      description: 'Calcula alcances técnicos, requerimientos por módulos y presupuesto preliminar en tiempo real según el stack elegido.',
+      title: 'Estimación Clara y Transparente',
+      description: 'Calcula alcances, requerimientos y obtén un presupuesto preliminar estructurado para tu proyecto.',
       tag: 'Tiempo Real'
     },
     {
       icon: 'shield',
-      title: 'Protección NDA Automática',
-      description: 'Tu propiedad intelectual, especificaciones y modelos de negocio quedan 100% blindados bajo contrato de confidencialidad.',
-      tag: 'Legal & RLS'
+      title: 'Confidencialidad Garantizada (NDA)',
+      description: 'Tu idea de negocio, especificaciones e información quedan 100% protegidas bajo contrato de confidencialidad.',
+      tag: 'Seguridad'
     },
     {
       icon: 'kanban',
-      title: 'Tablero Kanban & Sprints',
-      description: 'Monitorea cada fase de tu proyecto: Descubrimiento, Diseño UI/UX, Desarrollo de Software y Control de Calidad QA.',
+      title: 'Seguimiento Paso a Paso',
+      description: 'Monitorea en vivo cada avance de tu proyecto: Planificación, Diseño visual, Construcción y Pruebas finales.',
       tag: 'Transparencia'
     },
     {
       icon: 'team',
-      title: 'Arquitectos de Software Asignados',
-      description: 'Revisión directa de tus especificaciones técnicas por ingenieros senior para afinar el roadmap de tu solución.',
-      tag: 'SLA < 24h'
+      title: 'Especialistas Asignados a tu Proyecto',
+      description: 'Asesoría y revisión directa por ingenieros especializados para guiarte en cada etapa de tu solución digital.',
+      tag: 'Respuesta < 24h'
     }
   ];
 
@@ -81,17 +81,17 @@ export class QuoteEstimatorComponent {
     {
       number: '01',
       title: 'Crea tu Cuenta de Cliente',
-      desc: 'Regístrate en menos de 30 segundos con Google o correo electrónico corporativo/personal sin costo alguno.'
+      desc: 'Regístrate en menos de 30 segundos con Google o tu correo electrónico sin costo alguno.'
     },
     {
       number: '02',
-      title: 'Accede al Estimador Interactivo',
-      desc: 'Selecciona tipo de proyecto (Web, Mobile, IA, SaaS, Cloud), tecnologías deseadas y describe tus requerimientos.'
+      title: 'Cuéntanos qué necesitas',
+      desc: 'Selecciona si buscas una página web, app móvil, sistema de gestión o automatización y cuéntanos tu idea.'
     },
     {
       number: '03',
-      title: 'Obtén tu Propuesta & Inicia',
-      desc: 'Recibe estimación de sprints, desglose presupuestal y activa tu proyecto directamente en el tablero Kanban.'
+      title: 'Recibe tu Plan e Inicia',
+      desc: 'Revisamos tu solicitud, te entregamos los tiempos de entrega y damos inicio directo a tu proyecto.'
     }
   ];
 

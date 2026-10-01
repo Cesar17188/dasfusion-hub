@@ -51,7 +51,7 @@ export const routes: Routes = [
       {
         path: 'estimator',
         loadComponent: () => import('./portal/pages/estimator/portal-estimator.component').then(m => m.PortalEstimatorComponent),
-        title: 'Cotizador & Estimación IA | DASFusion Portal'
+        title: 'Cotizador & Estimación | DASFusion Portal'
       },
       {
         path: 'settings',
